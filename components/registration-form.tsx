@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Ticket, CheckCircle2 } from "lucide-react"
+import { supabase } from "../lib/ClienteSupaBase"
+
 
 export function RegistrationForm() {
   const [formData, setFormData] = useState({

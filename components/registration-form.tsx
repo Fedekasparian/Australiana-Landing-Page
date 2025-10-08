@@ -7,9 +7,8 @@ import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Ticket, CheckCircle2 } from "lucide-react"
-import { supabase } from "../lib/ClienteSupaBase"
-
+import { Ticket, CheckCircle2, AlertCircle } from "lucide-react"
+import { registerForPresale } from "@/app/actions/register"
 
 export function RegistrationForm() {
   const [formData, setFormData] = useState({
@@ -19,18 +18,32 @@ export function RegistrationForm() {
     email: "",
   })
   const [submitted, setSubmitted] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Here you would typically send the data to your backend
-    console.log("Form submitted:", formData)
-    setSubmitted(true)
+    setIsLoading(true)
+    setError(null)
 
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setSubmitted(false)
-      setFormData({ nombre: "", apellido: "", telefono: "", email: "" })
-    }, 3000)
+    try {
+      const result = await registerForPresale(formData)
+
+      if (result.success) {
+        setSubmitted(true)
+        setTimeout(() => {
+          setSubmitted(false)
+          setFormData({ nombre: "", apellido: "", telefono: "", email: "" })
+        }, 5000)
+      } else {
+        setError(result.error || "Error al registrar. Por favor, intenta nuevamente.")
+      }
+    } catch (err) {
+      console.error("[v0] Error submitting form:", err)
+      setError("Error inesperado. Por favor, intenta nuevamente.")
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -76,6 +89,7 @@ export function RegistrationForm() {
                       onChange={handleChange}
                       className="h-12 text-base"
                       placeholder="Tu nombre"
+                      disabled={isLoading}
                     />
                   </div>
 
@@ -92,6 +106,7 @@ export function RegistrationForm() {
                       onChange={handleChange}
                       className="h-12 text-base"
                       placeholder="Tu apellido"
+                      disabled={isLoading}
                     />
                   </div>
                 </div>
@@ -109,6 +124,7 @@ export function RegistrationForm() {
                     onChange={handleChange}
                     className="h-12 text-base"
                     placeholder="+54 9 11 1234-5678"
+                    disabled={isLoading}
                   />
                 </div>
 
@@ -125,16 +141,25 @@ export function RegistrationForm() {
                     onChange={handleChange}
                     className="h-12 text-base"
                     placeholder="tu@email.com"
+                    disabled={isLoading}
                   />
                 </div>
+
+                {error && (
+                  <div className="flex items-center gap-2 p-4 bg-destructive/10 border border-destructive/20 rounded-lg">
+                    <AlertCircle className="w-5 h-5 text-destructive flex-shrink-0" />
+                    <p className="text-sm text-destructive">{error}</p>
+                  </div>
+                )}
 
                 <div className="pt-4">
                   <Button
                     type="submit"
                     size="lg"
                     className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-lg h-14 rounded-full"
+                    disabled={isLoading}
                   >
-                    CONFIRMAR REGISTRO
+                    {isLoading ? "REGISTRANDO..." : "CONFIRMAR REGISTRO"}
                   </Button>
                 </div>
 

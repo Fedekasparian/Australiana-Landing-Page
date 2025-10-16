@@ -16,6 +16,7 @@ export function RegistrationForm() {
     apellido: "",
     telefono: "",
     email: "",
+    cantidadEntradas: "",
   })
   const [submitted, setSubmitted] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -33,7 +34,7 @@ export function RegistrationForm() {
         setSubmitted(true)
         setTimeout(() => {
           setSubmitted(false)
-          setFormData({ nombre: "", apellido: "", telefono: "", email: "" })
+          setFormData({ nombre: "", apellido: "", telefono: "", email: "", cantidadEntradas: "" })
         }, 5000)
       } else {
         setError(result.error || "Error al registrar. Por favor, intenta nuevamente.")
@@ -141,6 +142,23 @@ export function RegistrationForm() {
                     onChange={handleChange}
                     className="h-11 sm:h-12 text-sm sm:text-base"
                     placeholder="tu@email.com"
+                    disabled={isLoading}
+                  />
+                </div>
+
+                                <div className="space-y-2">
+                  <Label htmlFor="cantidadEntradas" className="text-sm sm:text-base font-bold">
+                    Cantidad de entradas *
+                  </Label>
+                  <Input
+                    id="cantidadEntradas"
+                    name="cantidadEntradas"
+                    type="number"
+                    required
+                    value={formData.cantidadEntradas}
+                    onChange={handleChange}
+                    className="h-11 sm:h-12 text-sm sm:text-base"
+                    placeholder="1, 2, 3, 4..."
                     disabled={isLoading}
                   />
                 </div>

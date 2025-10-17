@@ -16,6 +16,7 @@ export function RegistrationForm() {
     apellido: "",
     telefono: "",
     email: "",
+    cantidad: "",
   })
   const [file, setFile] = useState<File | null>(null)
   const [submitted, setSubmitted] = useState(false)
@@ -33,6 +34,7 @@ export function RegistrationForm() {
       formDataToSend.append("apellido", formData.apellido)
       formDataToSend.append("telefono", formData.telefono)
       formDataToSend.append("email", formData.email)
+      formDataToSend.append("cantidad", formData.cantidad)
       if (file) {
         formDataToSend.append("file", file)
       }
@@ -43,7 +45,7 @@ export function RegistrationForm() {
         setSubmitted(true)
         setTimeout(() => {
           setSubmitted(false)
-          setFormData({ nombre: "", apellido: "", telefono: "", email: "" })
+          setFormData({ nombre: "", apellido: "", telefono: "", email: "", cantidad: "" })
           setFile(null)
         }, 5000)
       } else {
@@ -174,8 +176,25 @@ export function RegistrationForm() {
                 </div>
 
                 <div className="space-y-2">
+                  <Label htmlFor="email" className="text-sm sm:text-base font-bold">
+                    Cantidad de entradas *
+                  </Label>
+                  <Input
+                    id="cantidadEntradas"
+                    name="cantidadEntradas"
+                    type="numbre"
+                    required
+                    value={formData.cantidad}
+                    onChange={handleChange}
+                    className="h-11 sm:h-12 text-sm sm:text-base"
+                    placeholder="1, 2, 3..."
+                    disabled={isLoading}
+                  />
+                </div>
+
+                <div className="space-y-2">
                   <Label htmlFor="archivo" className="text-sm sm:text-base font-bold">
-                    Comprobante o Imagen (opcional)
+                    Comprobante *
                   </Label>
                   <div className="space-y-3">
                     {!file ? (

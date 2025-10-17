@@ -7,7 +7,7 @@ import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Ticket, CheckCircle2, AlertCircle } from "lucide-react"
+import { Ticket, CheckCircle2, AlertCircle, Upload, X } from "lucide-react"
 import { registerForPresale } from "@/app/actions/register"
 
 export function RegistrationForm() {
@@ -16,8 +16,8 @@ export function RegistrationForm() {
     apellido: "",
     telefono: "",
     email: "",
-    cantidadEntradas: "",
   })
+  const [file, setFile] = useState<File | null>(null)
   const [submitted, setSubmitted] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -28,13 +28,23 @@ export function RegistrationForm() {
     setError(null)
 
     try {
-      const result = await registerForPresale(formData)
+      const formDataToSend = new FormData()
+      formDataToSend.append("nombre", formData.nombre)
+      formDataToSend.append("apellido", formData.apellido)
+      formDataToSend.append("telefono", formData.telefono)
+      formDataToSend.append("email", formData.email)
+      if (file) {
+        formDataToSend.append("file", file)
+      }
+
+      const result = await registerForPresale(formDataToSend)
 
       if (result.success) {
         setSubmitted(true)
         setTimeout(() => {
           setSubmitted(false)
-          setFormData({ nombre: "", apellido: "", telefono: "", email: "", cantidadEntradas: "" })
+          setFormData({ nombre: "", apellido: "", telefono: "", email: "" })
+          setFile(null)
         }, 5000)
       } else {
         setError(result.error || "Error al registrar. Por favor, intenta nuevamente.")
@@ -52,6 +62,23 @@ export function RegistrationForm() {
       ...prev,
       [e.target.name]: e.target.value,
     }))
+  }
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = e.target.files?.[0]
+    if (selectedFile) {
+      // Validate file size (max 10MB)
+      if (selectedFile.size > 10 * 1024 * 1024) {
+        setError("El archivo es demasiado grande. Máximo 10MB.")
+        return
+      }
+      setFile(selectedFile)
+      setError(null)
+    }
+  }
+
+  const removeFile = () => {
+    setFile(null)
   }
 
   return (
@@ -146,21 +173,50 @@ export function RegistrationForm() {
                   />
                 </div>
 
-                                <div className="space-y-2">
-                  <Label htmlFor="cantidadEntradas" className="text-sm sm:text-base font-bold">
-                    Cantidad de entradas *
+                <div className="space-y-2">
+                  <Label htmlFor="archivo" className="text-sm sm:text-base font-bold">
+                    Comprobante o Imagen (opcional)
                   </Label>
-                  <Input
-                    id="cantidadEntradas"
-                    name="cantidadEntradas"
-                    type="number"
-                    required
-                    value={formData.cantidadEntradas}
-                    onChange={handleChange}
-                    className="h-11 sm:h-12 text-sm sm:text-base"
-                    placeholder="1, 2, 3, 4..."
-                    disabled={isLoading}
-                  />
+                  <div className="space-y-3">
+                    {!file ? (
+                      <div className="relative">
+                        <Input
+                          id="archivo"
+                          name="archivo"
+                          type="file"
+                          onChange={handleFileChange}
+                          className="hidden"
+                          accept="image/*,.pdf,.doc,.docx"
+                          disabled={isLoading}
+                        />
+                        <Label
+                          htmlFor="archivo"
+                          className="flex items-center justify-center gap-2 h-24 sm:h-28 border-2 border-dashed border-muted-foreground/25 rounded-lg cursor-pointer hover:border-primary hover:bg-primary/5 transition-colors"
+                        >
+                          <Upload className="w-5 h-5 sm:w-6 sm:h-6 text-muted-foreground" />
+                          <span className="text-sm sm:text-base text-muted-foreground">Subir archivo (máx. 10MB)</span>
+                        </Label>
+                      </div>
+                    ) : (
+                      <div className="flex items-center gap-3 p-3 sm:p-4 bg-primary/5 border border-primary/20 rounded-lg">
+                        <div className="flex-1 min-w-0">
+                          <p className="text-xs sm:text-sm font-medium text-foreground truncate">{file.name}</p>
+                          <p className="text-xs text-muted-foreground">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+                        </div>
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          size="sm"
+                          onClick={removeFile}
+                          disabled={isLoading}
+                          className="flex-shrink-0"
+                        >
+                          <X className="w-4 h-4" />
+                        </Button>
+                      </div>
+                    )}
+                    <p className="text-xs text-muted-foreground">Formatos aceptados: imágenes, PDF, Word</p>
+                  </div>
                 </div>
 
                 {error && (

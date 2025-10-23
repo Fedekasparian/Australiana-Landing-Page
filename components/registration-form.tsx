@@ -7,8 +7,7 @@ import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Ticket, CheckCircle2, AlertCircle, Upload, X } from "lucide-react"
-import { registerForPresale } from "@/app/actions/register"
+import { Ticket, CheckCircle2, Upload, X, CreditCard } from "lucide-react"
 
 export function RegistrationForm() {
   const [formData, setFormData] = useState({
@@ -16,66 +15,45 @@ export function RegistrationForm() {
     apellido: "",
     telefono: "",
     email: "",
-    cantidad: "",
+    cantidadEntradas: 1,
   })
   const [file, setFile] = useState<File | null>(null)
+  const [showPaymentInfo, setShowPaymentInfo] = useState(false)
   const [submitted, setSubmitted] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
+
+  const handleGoToPay = (e: React.FormEvent) => {
+    e.preventDefault()
+    setShowPaymentInfo(true)
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setIsLoading(true)
-    setError(null)
-
-    try {
-      const formDataToSend = new FormData()
-      formDataToSend.append("nombre", formData.nombre)
-      formDataToSend.append("apellido", formData.apellido)
-      formDataToSend.append("telefono", formData.telefono)
-      formDataToSend.append("email", formData.email)
-      formDataToSend.append("cantidad", formData.cantidad)
-      if (file) {
-        formDataToSend.append("file", file)
-      }
-
-      const result = await registerForPresale(formDataToSend)
-
-      if (result.success) {
-        setSubmitted(true)
-        setTimeout(() => {
-          setSubmitted(false)
-          setFormData({ nombre: "", apellido: "", telefono: "", email: "", cantidad: "" })
-          setFile(null)
-        }, 5000)
-      } else {
-        setError(result.error || "Error al registrar. Por favor, intenta nuevamente.")
-      }
-    } catch (err) {
-      console.error("[v0] Error submitting form:", err)
-      setError("Error inesperado. Por favor, intenta nuevamente.")
-    } finally {
-      setIsLoading(false)
-    }
+    // User will handle database manually, just show success
+    setSubmitted(true)
+    setTimeout(() => {
+      setSubmitted(false)
+      setFormData({ nombre: "", apellido: "", telefono: "", email: "", cantidadEntradas: 1 })
+      setFile(null)
+      setShowPaymentInfo(false)
+    }, 5000)
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.type === "number" ? Number.parseInt(e.target.value) || 1 : e.target.value
     setFormData((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value,
+      [e.target.name]: value,
     }))
   }
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0]
     if (selectedFile) {
-      // Validate file size (max 10MB)
       if (selectedFile.size > 10 * 1024 * 1024) {
-        setError("El archivo es demasiado grande. Máximo 10MB.")
+        alert("El archivo es demasiado grande. Máximo 10MB.")
         return
       }
       setFile(selectedFile)
-      setError(null)
     }
   }
 
@@ -104,7 +82,7 @@ export function RegistrationForm() {
           {/* Form card */}
           <Card className="p-6 sm:p-8 border-2 shadow-xl">
             {!submitted ? (
-              <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
+              <form onSubmit={showPaymentInfo ? handleSubmit : handleGoToPay} className="space-y-5 sm:space-y-6">
                 <div className="grid sm:grid-cols-2 gap-5 sm:gap-6">
                   <div className="space-y-2">
                     <Label htmlFor="nombre" className="text-sm sm:text-base font-bold">
@@ -119,7 +97,7 @@ export function RegistrationForm() {
                       onChange={handleChange}
                       className="h-11 sm:h-12 text-sm sm:text-base"
                       placeholder="Tu nombre"
-                      disabled={isLoading}
+                      disabled={showPaymentInfo}
                     />
                   </div>
 
@@ -136,7 +114,7 @@ export function RegistrationForm() {
                       onChange={handleChange}
                       className="h-11 sm:h-12 text-sm sm:text-base"
                       placeholder="Tu apellido"
-                      disabled={isLoading}
+                      disabled={showPaymentInfo}
                     />
                   </div>
                 </div>
@@ -154,7 +132,7 @@ export function RegistrationForm() {
                     onChange={handleChange}
                     className="h-11 sm:h-12 text-sm sm:text-base"
                     placeholder="+54 9 11 1234-5678"
-                    disabled={isLoading}
+                    disabled={showPaymentInfo}
                   />
                 </div>
 
@@ -171,93 +149,142 @@ export function RegistrationForm() {
                     onChange={handleChange}
                     className="h-11 sm:h-12 text-sm sm:text-base"
                     placeholder="tu@email.com"
-                    disabled={isLoading}
+                    disabled={showPaymentInfo}
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="email" className="text-sm sm:text-base font-bold">
-                    Cantidad de entradas *
+                  <Label htmlFor="cantidadEntradas" className="text-sm sm:text-base font-bold">
+                    Cantidad de Entradas *
                   </Label>
                   <Input
                     id="cantidadEntradas"
                     name="cantidadEntradas"
-                    type="numbre"
+                    type="number"
+                    min="1"
+                    max="10"
                     required
-                    value={formData.cantidad}
+                    value={formData.cantidadEntradas}
                     onChange={handleChange}
                     className="h-11 sm:h-12 text-sm sm:text-base"
-                    placeholder="1, 2, 3..."
-                    disabled={isLoading}
+                    placeholder="1"
+                    disabled={showPaymentInfo}
                   />
+                  <p className="text-xs text-muted-foreground">Máximo 10 entradas por persona</p>
                 </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="archivo" className="text-sm sm:text-base font-bold">
-                    Comprobante *
-                  </Label>
-                  <div className="space-y-3">
-                    {!file ? (
-                      <div className="relative">
-                        <Input
-                          id="archivo"
-                          name="archivo"
-                          type="file"
-                          onChange={handleFileChange}
-                          className="hidden"
-                          accept="image/*,.pdf,.doc,.docx"
-                          disabled={isLoading}
-                        />
-                        <Label
-                          htmlFor="archivo"
-                          className="flex items-center justify-center gap-2 h-24 sm:h-28 border-2 border-dashed border-muted-foreground/25 rounded-lg cursor-pointer hover:border-primary hover:bg-primary/5 transition-colors"
-                        >
-                          <Upload className="w-5 h-5 sm:w-6 sm:h-6 text-muted-foreground" />
-                          <span className="text-sm sm:text-base text-muted-foreground">Subir archivo (máx. 10MB)</span>
-                        </Label>
+                {showPaymentInfo && (
+                  <div className="space-y-5 sm:space-y-6 pt-4 border-t-2 border-primary/20">
+                    <div className="bg-primary/10 p-4 sm:p-6 rounded-lg space-y-4">
+                      <div className="flex items-center gap-2 mb-3">
+                        <CreditCard className="w-5 h-5 text-primary" />
+                        <h3 className="text-lg sm:text-xl font-bold text-foreground">Información de Pago</h3>
                       </div>
-                    ) : (
-                      <div className="flex items-center gap-3 p-3 sm:p-4 bg-primary/5 border border-primary/20 rounded-lg">
-                        <div className="flex-1 min-w-0">
-                          <p className="text-xs sm:text-sm font-medium text-foreground truncate">{file.name}</p>
-                          <p className="text-xs text-muted-foreground">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+
+                      <div className="space-y-3 text-sm sm:text-base">
+                        <div className="bg-background p-3 sm:p-4 rounded-lg">
+                          <p className="text-xs text-muted-foreground mb-1">ALIAS</p>
+                          <p className="font-bold text-foreground">australiana.preventa</p>
                         </div>
-                        <Button
-                          type="button"
-                          variant="ghost"
-                          size="sm"
-                          onClick={removeFile}
-                          disabled={isLoading}
-                          className="flex-shrink-0"
-                        >
-                          <X className="w-4 h-4" />
-                        </Button>
-                      </div>
-                    )}
-                    <p className="text-xs text-muted-foreground">Formatos aceptados: imágenes, PDF, Word</p>
-                  </div>
-                </div>
 
-                {error && (
-                  <div className="flex items-center gap-2 p-3 sm:p-4 bg-destructive/10 border border-destructive/20 rounded-lg">
-                    <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5 text-destructive flex-shrink-0" />
-                    <p className="text-xs sm:text-sm text-destructive">{error}</p>
+                        <div className="bg-background p-3 sm:p-4 rounded-lg">
+                          <p className="text-xs text-muted-foreground mb-1">CBU</p>
+                          <p className="font-bold text-foreground">0000003100010234567890</p>
+                        </div>
+
+                        <div className="bg-background p-3 sm:p-4 rounded-lg">
+                          <p className="text-xs text-muted-foreground mb-1">CVU</p>
+                          <p className="font-bold text-foreground">0000076500000001234567</p>
+                        </div>
+
+                        <div className="bg-background p-3 sm:p-4 rounded-lg">
+                          <p className="text-xs text-muted-foreground mb-1">MONTO A TRANSFERIR</p>
+                          <p className="font-bold text-primary text-lg sm:text-xl">
+                            ${(formData.cantidadEntradas * 5000).toLocaleString("es-AR")}
+                          </p>
+                          <p className="text-xs text-muted-foreground mt-1">
+                            {formData.cantidadEntradas} {formData.cantidadEntradas === 1 ? "entrada" : "entradas"} ×
+                            $5.000
+                          </p>
+                        </div>
+                      </div>
+
+                      <p className="text-xs text-muted-foreground text-center pt-2">
+                        Realizá la transferencia y subí el comprobante a continuación
+                      </p>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="archivo" className="text-sm sm:text-base font-bold">
+                        Comprobante de Pago *
+                      </Label>
+                      <div className="space-y-3">
+                        {!file ? (
+                          <div className="relative">
+                            <Input
+                              id="archivo"
+                              name="archivo"
+                              type="file"
+                              onChange={handleFileChange}
+                              className="hidden"
+                              accept="image/*,.pdf"
+                              required
+                            />
+                            <Label
+                              htmlFor="archivo"
+                              className="flex items-center justify-center gap-2 h-24 sm:h-28 border-2 border-dashed border-primary/50 rounded-lg cursor-pointer hover:border-primary hover:bg-primary/5 transition-colors"
+                            >
+                              <Upload className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
+                              <span className="text-sm sm:text-base text-foreground font-medium">
+                                Subir comprobante (máx. 10MB)
+                              </span>
+                            </Label>
+                          </div>
+                        ) : (
+                          <div className="flex items-center gap-3 p-3 sm:p-4 bg-primary/5 border border-primary/20 rounded-lg">
+                            <div className="flex-1 min-w-0">
+                              <p className="text-xs sm:text-sm font-medium text-foreground truncate">{file.name}</p>
+                              <p className="text-xs text-muted-foreground">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+                            </div>
+                            <Button
+                              type="button"
+                              variant="ghost"
+                              size="sm"
+                              onClick={removeFile}
+                              className="flex-shrink-0"
+                            >
+                              <X className="w-4 h-4" />
+                            </Button>
+                          </div>
+                        )}
+                        <p className="text-xs text-muted-foreground">Formatos aceptados: imágenes, PDF</p>
+                      </div>
+                    </div>
                   </div>
                 )}
 
                 <div className="pt-2 sm:pt-4">
-                  <Button
-                    type="submit"
-                    size="lg"
-                    className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base sm:text-lg h-12 sm:h-14 rounded-full"
-                    disabled={isLoading}
-                  >
-                    {isLoading ? "REGISTRANDO..." : "CONFIRMAR REGISTRO"}
-                  </Button>
+                  {!showPaymentInfo ? (
+                    <Button
+                      type="submit"
+                      size="lg"
+                      className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base sm:text-lg h-12 sm:h-14 rounded-full"
+                    >
+                      IR A PAGAR
+                    </Button>
+                  ) : (
+                    <Button
+                      type="submit"
+                      size="lg"
+                      className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base sm:text-lg h-12 sm:h-14 rounded-full"
+                    >
+                      CONFIRMAR REGISTRO
+                    </Button>
+                  )}
                 </div>
 
                 <p className="text-xs sm:text-sm text-muted-foreground text-center">
-                  Al registrarte, aceptás recibir información sobre el evento y las instrucciones de pago
+                  Al registrarte, aceptás recibir información sobre el evento
                 </p>
               </form>
             ) : (
@@ -267,7 +294,7 @@ export function RegistrationForm() {
                 </div>
                 <h3 className="text-xl sm:text-2xl font-bold text-foreground">¡Registro Exitoso!</h3>
                 <p className="text-sm sm:text-base text-muted-foreground px-4">
-                  Te enviaremos un email con las instrucciones de pago y más información del evento.
+                  Recibimos tu comprobante. Te enviaremos un email con la confirmación y más información del evento.
                 </p>
               </div>
             )}

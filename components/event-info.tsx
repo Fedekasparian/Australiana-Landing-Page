@@ -42,15 +42,24 @@ export function EventInfo() {
           </Card>
 
           <Card className="p-5 sm:p-6 border-2 hover:border-primary transition-colors sm:col-span-2 lg:col-span-1">
-            <div className="flex items-start gap-3 sm:gap-4">
-              <div className="bg-primary/10 p-2.5 sm:p-3 rounded-lg flex-shrink-0">
+            <a
+              href="https://maps.app.goo.gl/tYbEfrdMnekLbSqE8"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-start gap-3 sm:gap-4 group"
+            >
+              <div className="bg-primary/10 p-2.5 sm:p-3 rounded-lg flex-shrink-0 group-hover:bg-primary/20 transition-colors">
                 <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
               </div>
               <div>
-                <h3 className="font-bold text-base sm:text-lg mb-1">Ubicación</h3>
-                <p className="text-sm sm:text-base text-muted-foreground">Club Mercedes, Mercedes BA</p>
+                <h3 className="font-bold text-base sm:text-lg mb-1 group-hover:text-primary transition-colors">
+                  Ubicación
+                </h3>
+                <p className="text-sm sm:text-base text-muted-foreground group-hover:underline">
+                  Club Atlético Mercedes, Mercedes BA
+                </p>
               </div>
-            </div>
+            </a>
           </Card>
         </div>
 

@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Ticket, CheckCircle2, Upload, X, CreditCard } from "lucide-react"
+import { CountdownTimer } from "@/components/countdown-timer"
 
 export function RegistrationForm() {
   const [formData, setFormData] = useState({
@@ -20,16 +21,19 @@ export function RegistrationForm() {
   const [file, setFile] = useState<File | null>(null)
   const [showPaymentInfo, setShowPaymentInfo] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [showTimer, setShowTimer] = useState(false)
 
   const handleGoToPay = (e: React.FormEvent) => {
     e.preventDefault()
     setShowPaymentInfo(true)
+    setShowTimer(true)
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     // User will handle database manually, just show success
     setSubmitted(true)
+    setShowTimer(false)
     setTimeout(() => {
       setSubmitted(false)
       setFormData({ nombre: "", apellido: "", telefono: "", email: "", cantidadEntradas: 1 })
@@ -63,6 +67,8 @@ export function RegistrationForm() {
 
   return (
     <section id="registro" className="py-12 sm:py-16 lg:py-20 bg-secondary/5">
+      {showTimer && <CountdownTimer onClose={() => setShowTimer(false)} />}
+
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl mx-auto">
           {/* Section header */}

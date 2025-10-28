@@ -1,0 +1,44 @@
+import Image from "next/image"
+import { Card } from "@/components/ui/card"
+
+export function Sponsors() {
+  // Placeholder sponsors - replace with actual sponsor logos
+  const sponsors = [
+    { name: "Sponsor 1", logo: "/generic-sponsor-logo-1.png" },
+    { name: "Sponsor 2", logo: "/generic-sponsor-logo-2.png" },
+    { name: "Sponsor 3", logo: "/generic-sponsor-logo-3.png" },
+    { name: "Sponsor 4", logo: "/sponsor-logo-4.jpg" },
+    { name: "Sponsor 5", logo: "/sponsor-logo-5.png" },
+    { name: "Sponsor 6", logo: "/sponsor-logo-6.jpg" },
+  ]
+
+  return (
+    <section className="py-12 sm:py-16 bg-muted/30">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-8 sm:mb-10">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-foreground mb-2">
+            NUESTROS <span className="text-primary">SPONSORS</span>
+          </h2>
+          <p className="text-sm sm:text-base text-muted-foreground">Gracias a quienes hacen posible este evento</p>
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6">
+          {sponsors.map((sponsor, index) => (
+            <Card
+              key={index}
+              className="p-4 sm:p-6 flex items-center justify-center hover:shadow-lg transition-shadow bg-background"
+            >
+              <Image
+                src={sponsor.logo || "/placeholder.svg"}
+                alt={sponsor.name}
+                width={160}
+                height={80}
+                className="w-full h-auto object-contain grayscale hover:grayscale-0 transition-all"
+              />
+            </Card>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}

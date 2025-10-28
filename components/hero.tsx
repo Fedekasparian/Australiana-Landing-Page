@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { ArrowDown } from "lucide-react"
+import Image from "next/image"
 
 export function Hero() {
   const scrollToInfo = () => {
@@ -18,6 +19,18 @@ export function Hero() {
             backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.1) 35px, rgba(255,255,255,.1) 70px)`,
           }}
         />
+      </div>
+
+      <div className="absolute top-6 left-6 sm:top-8 sm:left-8 z-20">
+        <div className="bg-white/10 backdrop-blur-sm p-3 sm:p-4 rounded-2xl border-2 border-white/20">
+          <Image
+            src="/australiana-event-logo.jpg"
+            alt="Australiana Logo"
+            width={80}
+            height={80}
+            className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20"
+          />
+        </div>
       </div>
 
       {/* Content */}

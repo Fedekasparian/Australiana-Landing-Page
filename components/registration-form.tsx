@@ -1,170 +1,70 @@
 "use client"
 
 import type React from "react"
-import { useState, useEffect } from "react"
+
+import { useState } from "react"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Ticket, CheckCircle2, Upload, X, CreditCard } from "lucide-react"
-import { registrarReserva1, registrarUsuario } from "../app/actions/register"
-import { registrarReserva } from "../app/actions/register"
-import { supabase } from "../lib/supabase"
-import { cargarPago } from "../app/actions/register"
-import CountdownTimer from "./ui/timer"
 
-export function setIdForm(id:number){
-  setIdForm(id)
-}
-
-export function RegistrarForm() {
+export function RegistrationForm() {
   const [formData, setFormData] = useState({
     nombre: "",
     apellido: "",
     telefono: "",
-    mail: "",
-    cantidad: 1,
-    archivo: "",
+    email: "",
+    cantidadEntradas: 1,
   })
   const [file, setFile] = useState<File | null>(null)
   const [showPaymentInfo, setShowPaymentInfo] = useState(false)
   const [submitted, setSubmitted] = useState(false)
-  const [respuesta, setRespuesta] = useState("")
-  const [idForm, setIdForm] = useState<number | null>(null)
-  const [timer, setTimer] = useState<NodeJS.Timeout | null>(null)
 
-
-
-  // Llama la funcion para insertar la reserva y ademas si es exitoso habilita la seccion de pago
-  const handleGoToPay = async (e: React.FormEvent) => {
+  const handleGoToPay = (e: React.FormEvent) => {
     e.preventDefault()
-
-      const response = await registrarReserva({
-      nombre: formData.nombre,
-      apellido: formData.apellido,
-      telefono: formData.telefono,
-      email: formData.mail,
-      cantidad: formData.cantidad,
-      creada_en: new Date(), //fecha actual
-      expira_en: new Date(Date.now() + 10*60*1000), //fecha actual + 10 minutos
-      urlArchivo: "",
-      confirmada: false,  
-      } )
-
-      // Si response es exitoso, muestra la seccion de pago, sino muestra mensjae de error
-      if (response.error){
-        alert("Error al registrar la reserva: " + response.error.message)
-      }else {
-        setShowPaymentInfo(true)
-        const reservaId = response.data;
-        setIdForm(reservaId);
-        console.log("ID de la reserva creada:", reservaId)
-      }
+    setShowPaymentInfo(true)
   }
-
 
   const handleSubmit = async (e: React.FormEvent) => {
-    
-    alert("¡Enviando tu pago!")
-    handleConfirmacionPago();
-    // const response = await cargarPago({
-    //   idForm: idForm!,
-    //   urlArchivo: formData.archivo,
-    //   })
     e.preventDefault()
-    //Llamo a funcion en app/actions/register.ts para insertar en la bae de datoss
-
-    try{
-
-      
-      //Reset del formulario
-      setTimeout(() => {
-        setSubmitted(false)
-        setFormData({ nombre: "", apellido: "", telefono: "", mail: "", cantidad: 1, archivo: ""   })
-        setFile(null)
-        setShowPaymentInfo(false)
-      }, 5000)
-    }catch (error:any) {
-      alert("Error al registrar el usuario: " + error.message)
+    // User will handle database manually, just show success
+    setSubmitted(true)
+    setTimeout(() => {
       setSubmitted(false)
-    }
+      setFormData({ nombre: "", apellido: "", telefono: "", email: "", cantidadEntradas: 1 })
+      setFile(null)
+      setShowPaymentInfo(false)
+    }, 5000)
   }
 
-  // Manejador de cambios de los inputs
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.type === "number" ? Number.parseInt(e.target.value) : e.target.value
+    const value = e.target.type === "number" ? Number.parseInt(e.target.value) || 1 : e.target.value
     setFormData((prev) => ({
       ...prev,
       [e.target.name]: value,
     }))
   }
 
-
-  // Manejador de archivo
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("Cambiando archivo")
     const selectedFile = e.target.files?.[0]
-    console.log("Archivo seleccionado:", selectedFile)
     if (selectedFile) {
       if (selectedFile.size > 10 * 1024 * 1024) {
         alert("El archivo es demasiado grande. Máximo 10MB.")
         return
       }
       setFile(selectedFile)
-      }
     }
-  const removeFile = () => {
-    console.log("Removiendo archivo")
-    setFile(null)
   }
 
-  const handleConfirmacionPago = async () => {
-    if (!file) {
-      alert ("Por favor, subí el comprobante de pago.")
-      return;
-    }else{
-        const filePath = `preventa1/${idForm}_${formData.nombre}_${formData.apellido}`;
-
-        console.log("filePath:", filePath)
-        const { error: uploadError } = await supabase.storage
-        .from('comprobantes')
-        .upload(filePath, file)
-
-        if (uploadError) {
-          alert("Error al subir el archivo: " + uploadError.message)
-          return;
-        }
-
-
-        //Obtener url publica del archivo subido
-        const { data: {publicUrl} } = supabase.storage
-        .from('comprobantes')
-        .getPublicUrl(filePath)
-
-        console.log("publicUrl:", publicUrl)
-    
-        // Actualizar la reserva en la base de datos
-        const {error: updateError} = await supabase
-        .from('reservas')
-        .update({confirmada: true, urlArchivo: publicUrl})
-        .eq('id', idForm);
-        
-        if (updateError) {
-          alert("Error al actualizar la reserva: " + updateError.message)
-          return;
-        }
-
-        return ;
-      }
-
-
-
+  const removeFile = () => {
+    setFile(null)
   }
 
   return (
     <section id="registro" className="py-12 sm:py-16 lg:py-20 bg-secondary/5">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <Card className="max-w-2xl mx-auto">
+        <div className="max-w-2xl mx-auto">
           {/* Section header */}
           <div className="text-center mb-8 sm:mb-10 lg:mb-12 space-y-3 sm:space-y-4">
             <div className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-3 py-1.5 sm:px-4 sm:py-2 rounded-full font-bold text-xs sm:text-sm">
@@ -180,14 +80,10 @@ export function RegistrarForm() {
           </div>
 
           {/* Form card */}
-          <div className="p-6 sm:p-8 border-2 shadow-xl">
+          <Card className="p-6 sm:p-8 border-2 shadow-xl">
             {!submitted ? (
               <form onSubmit={showPaymentInfo ? handleSubmit : handleGoToPay} className="space-y-5 sm:space-y-6">
                 <div className="grid sm:grid-cols-2 gap-5 sm:gap-6">
-            
-                {/* <Button type="submit" onSubmit={handlePrueba}>Prueba</Button> */}
-                  
-                  {/* Nombre componente*/}
                   <div className="space-y-2">
                     <Label htmlFor="nombre" className="text-sm sm:text-base font-bold">
                       Nombre *
@@ -205,7 +101,6 @@ export function RegistrarForm() {
                     />
                   </div>
 
-                  {/* Apellido componente */}
                   <div className="space-y-2">
                     <Label htmlFor="apellido" className="text-sm sm:text-base font-bold">
                       Apellido *
@@ -222,10 +117,8 @@ export function RegistrarForm() {
                       disabled={showPaymentInfo}
                     />
                   </div>
-
                 </div>
 
-                {/* // Teléfono componente */}
                 <div className="space-y-2">
                   <Label htmlFor="telefono" className="text-sm sm:text-base font-bold">
                     Teléfono *
@@ -242,18 +135,17 @@ export function RegistrarForm() {
                     disabled={showPaymentInfo}
                   />
                 </div>
-                
-                {/* Email componente */}
+
                 <div className="space-y-2">
-                  <Label htmlFor="mail" className="text-sm sm:text-base font-bold">
+                  <Label htmlFor="email" className="text-sm sm:text-base font-bold">
                     Email *
                   </Label>
                   <Input
                     id="email"
-                    name="mail"
+                    name="email"
                     type="email"
                     required
-                    value={formData.mail}
+                    value={formData.email}
                     onChange={handleChange}
                     className="h-11 sm:h-12 text-sm sm:text-base"
                     placeholder="tu@email.com"
@@ -261,32 +153,28 @@ export function RegistrarForm() {
                   />
                 </div>
 
-                 {/* Cantidad de entradas componente */}
                 <div className="space-y-2">
-                  <Label htmlFor="cantidad" className="text-sm sm:text-base font-bold">
+                  <Label htmlFor="cantidadEntradas" className="text-sm sm:text-base font-bold">
                     Cantidad de Entradas *
                   </Label>
                   <Input
-                    id="cantidad"
-                    name="cantidad"
+                    id="cantidadEntradas"
+                    name="cantidadEntradas"
                     type="number"
                     min="1"
-                    max="3"
+                    max="10"
                     required
-                    value={formData.cantidad}
+                    value={formData.cantidadEntradas}
                     onChange={handleChange}
                     className="h-11 sm:h-12 text-sm sm:text-base"
-                    placeholder="1, 2 o 3"
+                    placeholder="1"
                     disabled={showPaymentInfo}
                   />
-                  <p className="text-xs text-muted-foreground">Máximo 3 entradas por persona</p>
+                  <p className="text-xs text-muted-foreground">Máximo 10 entradas por persona</p>
                 </div>
 
-                 {/* Sección de información de pago y carga de archivo */}
                 {showPaymentInfo && (
-
                   <div className="space-y-5 sm:space-y-6 pt-4 border-t-2 border-primary/20">
-                    <CountdownTimer/>
                     <div className="bg-primary/10 p-4 sm:p-6 rounded-lg space-y-4">
                       <div className="flex items-center gap-2 mb-3">
                         <CreditCard className="w-5 h-5 text-primary" />
@@ -312,10 +200,10 @@ export function RegistrarForm() {
                         <div className="bg-background p-3 sm:p-4 rounded-lg">
                           <p className="text-xs text-muted-foreground mb-1">MONTO A TRANSFERIR</p>
                           <p className="font-bold text-primary text-lg sm:text-xl">
-                            ${(formData.cantidad * 5000).toLocaleString("es-AR")}
+                            ${(formData.cantidadEntradas * 5000).toLocaleString("es-AR")}
                           </p>
                           <p className="text-xs text-muted-foreground mt-1">
-                            {formData.cantidad} {formData.cantidad === 1 ? "entrada" : "entradas"} ×
+                            {formData.cantidadEntradas} {formData.cantidadEntradas === 1 ? "entrada" : "entradas"} ×
                             $5.000
                           </p>
                         </div>
@@ -340,7 +228,7 @@ export function RegistrarForm() {
                               onChange={handleFileChange}
                               className="hidden"
                               accept="image/*,.pdf"
-                              required  // <- sólo requerido si no hay file seleccionado
+                              required
                             />
                             <Label
                               htmlFor="archivo"
@@ -375,13 +263,10 @@ export function RegistrarForm() {
                   </div>
                 )}
 
-                 {/* Boton ir a pagar */}
                 <div className="pt-2 sm:pt-4">
                   {!showPaymentInfo ? (
                     <Button
-                      type="button"
-                      //onSubmit={handleGoToPay}
-                      onClick = {handleGoToPay}
+                      type="submit"
                       size="lg"
                       className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base sm:text-lg h-12 sm:h-14 rounded-full"
                     >
@@ -413,7 +298,7 @@ export function RegistrarForm() {
                 </p>
               </div>
             )}
-          </div>
+          </Card>
 
           {/* Additional info */}
           <div className="mt-6 sm:mt-8 text-center px-4">
@@ -424,7 +309,7 @@ export function RegistrarForm() {
               </a>
             </p>
           </div>
-        </Card>
+        </div>
       </div>
     </section>
   )

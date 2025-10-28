@@ -48,7 +48,6 @@ function Button({
   }) {
   const Comp = asChild ? Slot : 'button'
 
-
   return (
     <Comp
       data-slot="button"

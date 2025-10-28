@@ -67,7 +67,7 @@ export function RegistrationForm() {
 
   return (
     <section id="registro" className="py-12 sm:py-16 lg:py-20 bg-secondary/5">
-      {showTimer && <CountdownTimer onClose={() => setShowTimer(false)} />}
+      {showTimer && <CountdownTimer />}
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl mx-auto">

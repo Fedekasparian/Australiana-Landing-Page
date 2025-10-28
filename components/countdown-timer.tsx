@@ -1,14 +1,9 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { Clock, X } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { Clock } from "lucide-react"
 
-interface CountdownTimerProps {
-  onClose: () => void
-}
-
-export function CountdownTimer({ onClose }: CountdownTimerProps) {
+export function CountdownTimer() {
   const [timeLeft, setTimeLeft] = useState(600) // 10 minutes in seconds
   const [isVisible, setIsVisible] = useState(false)
 
@@ -34,72 +29,53 @@ export function CountdownTimer({ onClose }: CountdownTimerProps) {
 
   const progress = (timeLeft / 600) * 100
 
-  const handleClose = () => {
-    setIsVisible(false)
-    setTimeout(onClose, 300)
-  }
-
   return (
     <div
       className={`fixed top-4 right-4 z-50 transition-all duration-300 ${
         isVisible ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
       }`}
     >
-      <div className="relative bg-gradient-to-br from-primary via-primary to-secondary text-primary-foreground rounded-2xl shadow-2xl p-5 min-w-[280px] border-2 border-white/20 backdrop-blur-sm">
-        {/* Close button */}
-        <Button
-          onClick={handleClose}
-          variant="ghost"
-          size="icon"
-          className="absolute -top-2 -right-2 h-7 w-7 rounded-full bg-background text-foreground hover:bg-background/90 shadow-lg"
-        >
-          <X className="h-4 w-4" />
-        </Button>
-
+      <div className="relative bg-background border-2 border-border rounded-xl shadow-lg p-4 min-w-[240px]">
         {/* Header */}
-        <div className="flex items-center gap-2 mb-4">
-          <div className="bg-white/20 p-2 rounded-lg backdrop-blur-sm">
-            <Clock className="w-5 h-5" />
-          </div>
+        <div className="flex items-center gap-2 mb-3">
+          <Clock className="w-4 h-4 text-muted-foreground" />
           <div>
-            <p className="text-xs font-semibold opacity-90">Tiempo restante</p>
-            <p className="text-[10px] opacity-75">para completar tu compra</p>
+            <p className="text-xs font-medium text-foreground">Tiempo restante</p>
           </div>
         </div>
 
-        {/* Timer display */}
-        <div className="relative mb-4">
-          <div className="flex items-center justify-center gap-1 mb-3">
-            <div className="bg-white/20 backdrop-blur-sm rounded-xl px-4 py-3 min-w-[70px] text-center">
-              <div className="text-4xl font-black leading-none tabular-nums">{String(minutes).padStart(2, "0")}</div>
-              <div className="text-[10px] font-semibold mt-1 opacity-75">MIN</div>
+        <div className="relative mb-3">
+          <div className="flex items-center justify-center gap-2 mb-2">
+            <div className="text-center">
+              <div className="text-3xl font-bold leading-none tabular-nums text-foreground">
+                {String(minutes).padStart(2, "0")}
+              </div>
             </div>
-            <div className="text-3xl font-black opacity-75 animate-pulse">:</div>
-            <div className="bg-white/20 backdrop-blur-sm rounded-xl px-4 py-3 min-w-[70px] text-center">
-              <div className="text-4xl font-black leading-none tabular-nums">{String(seconds).padStart(2, "0")}</div>
-              <div className="text-[10px] font-semibold mt-1 opacity-75">SEG</div>
+            <div className="text-2xl font-bold text-muted-foreground">:</div>
+            <div className="text-center">
+              <div className="text-3xl font-bold leading-none tabular-nums text-foreground">
+                {String(seconds).padStart(2, "0")}
+              </div>
             </div>
           </div>
 
-          {/* Progress bar */}
-          <div className="relative h-2 bg-white/20 rounded-full overflow-hidden backdrop-blur-sm">
+          <div className="relative h-1.5 bg-muted rounded-full overflow-hidden">
             <div
-              className="absolute top-0 left-0 h-full bg-white rounded-full transition-all duration-1000 ease-linear"
+              className="absolute top-0 left-0 h-full bg-primary rounded-full transition-all duration-1000 ease-linear"
               style={{ width: `${progress}%` }}
             />
           </div>
         </div>
 
-        {/* Warning message */}
         {timeLeft <= 60 && timeLeft > 0 && (
-          <div className="bg-white/20 backdrop-blur-sm rounded-lg px-3 py-2 animate-pulse">
-            <p className="text-xs font-bold text-center">¡Apurate! Tu tiempo está por vencer</p>
+          <div className="bg-muted rounded-md px-3 py-1.5">
+            <p className="text-xs font-medium text-center text-foreground">Tu tiempo está por vencer</p>
           </div>
         )}
 
         {timeLeft === 0 && (
-          <div className="bg-white/20 backdrop-blur-sm rounded-lg px-3 py-2">
-            <p className="text-xs font-bold text-center">Tiempo agotado</p>
+          <div className="bg-muted rounded-md px-3 py-1.5">
+            <p className="text-xs font-medium text-center text-destructive">Tiempo agotado</p>
           </div>
         )}
       </div>

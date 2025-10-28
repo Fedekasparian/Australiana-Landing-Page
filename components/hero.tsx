@@ -22,15 +22,7 @@ export function Hero() {
       </div>
 
       <div className="absolute top-6 left-6 sm:top-8 sm:left-8 z-20">
-        <div className="bg-white/10 backdrop-blur-sm p-3 sm:p-4 rounded-2xl border-2 border-white/20">
-          <Image
-            src="/fiesta-australiana-logo.png"
-            alt="Fiesta Australiana Logo"
-            width={80}
-            height={80}
-            className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20"
-          />
-        </div>
+        
       </div>
 
       {/* Content */}

@@ -1,8 +1,8 @@
 import Image from "next/image"
 import { Card } from "@/components/ui/card"
+import { Mail } from "lucide-react"
 
 export function Sponsors() {
-  // Placeholder sponsors - replace with actual sponsor logos
   const sponsors = [
     { name: "Sponsor 1", logo: "/generic-sponsor-logo-1.png" },
     { name: "Sponsor 2", logo: "/generic-sponsor-logo-2.png" },
@@ -10,6 +10,12 @@ export function Sponsors() {
     { name: "Sponsor 4", logo: "/sponsor-logo-4.jpg" },
     { name: "Sponsor 5", logo: "/sponsor-logo-5.png" },
     { name: "Sponsor 6", logo: "/sponsor-logo-6.jpg" },
+    { name: "Sponsor 7", logo: "/generic-sponsor-logo-1.png" },
+    { name: "Sponsor 8", logo: "/generic-sponsor-logo-2.png" },
+    { name: "Sponsor 9", logo: "/generic-sponsor-logo-3.png" },
+    { name: "Sponsor 10", logo: "/sponsor-logo-4.jpg" },
+    { name: "Sponsor 11", logo: "/sponsor-logo-5.png" },
+    { name: "Sponsor 12", logo: "/sponsor-logo-6.jpg" },
   ]
 
   return (
@@ -37,6 +43,22 @@ export function Sponsors() {
               />
             </Card>
           ))}
+        </div>
+
+        <div className="mt-10 sm:mt-12 text-center">
+          <div className="inline-block bg-gradient-to-r from-primary/10 to-secondary/10 rounded-2xl p-6 sm:p-8 border-2 border-primary/20">
+            <h3 className="text-xl sm:text-2xl font-black text-foreground mb-3">¿QUERÉS SER PARTE?</h3>
+            <p className="text-sm sm:text-base text-muted-foreground mb-4 max-w-2xl mx-auto">
+              Sumate como sponsor de la Fiesta Australiana y apoyá la tradición del rugby en Mercedes
+            </p>
+            <a
+              href="mailto:sponsors@fiestaustraliana.com"
+              className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-bold text-base sm:text-lg transition-colors"
+            >
+              <Mail className="w-5 h-5" />
+              sponsors@fiestaustraliana.com
+            </a>
+          </div>
         </div>
       </div>
     </section>

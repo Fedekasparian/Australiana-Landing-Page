@@ -7,9 +7,12 @@ import { Suspense } from "react"
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "v0 App",
-  description: "Created with v0",
+  title: "Fiesta Australiana",
+  description: "Fiesta Australiana - Evento deportivo y fiesta en Mercedes, Buenos Aires",
   generator: "v0.app",
+  icons:{
+    icon: "/icono_rosa.png"
+  }
 }
 
 export default function RootLayout({

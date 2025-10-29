@@ -3,8 +3,9 @@ import { Card } from "@/components/ui/card"
 import { Mail } from "lucide-react"
 
 export function Sponsors() {
+  const mainSponsor = { name: "Sponsor Principal", logo: "/generic-sponsor-logo-1.png" }
+
   const prioritySponsors = [
-    { name: "Sponsor Prioritario 1", logo: "/generic-sponsor-logo-1.png" },
     { name: "Sponsor Prioritario 2", logo: "/generic-sponsor-logo-2.png" },
     { name: "Sponsor Prioritario 3", logo: "/generic-sponsor-logo-3.png" },
   ]
@@ -32,8 +33,23 @@ export function Sponsors() {
         </div>
 
         <div className="mb-10 sm:mb-12">
+          <h3 className="text-lg sm:text-xl font-bold text-center text-foreground/80 mb-6">SPONSOR PRINCIPAL</h3>
+          <div className="flex justify-center">
+            <Card className="p-12 sm:p-16 max-w-2xl w-full hover:shadow-2xl transition-shadow bg-background">
+              <Image
+                src={mainSponsor.logo || "/placeholder.svg"}
+                alt={mainSponsor.name}
+                width={400}
+                height={200}
+                className="w-full h-auto object-contain grayscale hover:grayscale-0 transition-all"
+              />
+            </Card>
+          </div>
+        </div>
+
+        <div className="mb-10 sm:mb-12">
           <h3 className="text-lg sm:text-xl font-bold text-center text-foreground/80 mb-6">SPONSORS PRIORITARIOS</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
             {prioritySponsors.map((sponsor, index) => (
               <Card
                 key={index}

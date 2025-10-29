@@ -13,6 +13,7 @@ import { supabase } from "../lib/supabase"
 import { cargarPago } from "../app/actions/register"
 import CountdownTimer from "./ui/timer"
 
+
 export function setIdForm(id:number){
   setIdForm(id)
 }
@@ -53,7 +54,7 @@ export function RegistrarForm() {
 
       // Si response es exitoso, muestra la seccion de pago, sino muestra mensjae de error
       if (response.error){
-        alert("Error al registrar la reserva: " + response.error.message)
+        alert("Error al registrar la reserva: " + response.error)
       }else {
         setShowPaymentInfo(true)
         const reservaId = response.data;
@@ -65,25 +66,25 @@ export function RegistrarForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     
+    e.preventDefault()
     alert("¡Enviando tu pago!")
     handleConfirmacionPago();
     // const response = await cargarPago({
     //   idForm: idForm!,
     //   urlArchivo: formData.archivo,
     //   })
-    e.preventDefault()
     //Llamo a funcion en app/actions/register.ts para insertar en la bae de datoss
 
     try{
-
-      
       //Reset del formulario
       setTimeout(() => {
         setSubmitted(false)
         setFormData({ nombre: "", apellido: "", telefono: "", mail: "", cantidad: 1, archivo: ""   })
         setFile(null)
         setShowPaymentInfo(false)
-      }, 5000)
+      }, 10000)
+    
+
     }catch (error:any) {
       alert("Error al registrar el usuario: " + error.message)
       setSubmitted(false)
@@ -92,12 +93,15 @@ export function RegistrarForm() {
 
   // Manejador de cambios de los inputs
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.type === "number" ? Number.parseInt(e.target.value) : e.target.value
+
+    const value =e.target.value
+    e.target.type === "number" ? Number.parseInt(e.target.value) : e.target.value
     setFormData((prev) => ({
       ...prev,
       [e.target.name]: value,
     }))
-  }
+    }
+  
 
 
   // Manejador de archivo
@@ -106,8 +110,8 @@ export function RegistrarForm() {
     const selectedFile = e.target.files?.[0]
     console.log("Archivo seleccionado:", selectedFile)
     if (selectedFile) {
-      if (selectedFile.size > 10 * 1024 * 1024) {
-        alert("El archivo es demasiado grande. Máximo 10MB.")
+      if (selectedFile.size > 5 * 1024 * 1024) {
+        alert("El archivo es demasiado grande. Máximo 5MB.")
         return
       }
       setFile(selectedFile)
@@ -116,6 +120,7 @@ export function RegistrarForm() {
   const removeFile = () => {
     console.log("Removiendo archivo")
     setFile(null)
+    console.log(file)
   }
 
   const handleConfirmacionPago = async () => {
@@ -154,6 +159,7 @@ export function RegistrarForm() {
           return;
         }
 
+        setSubmitted(true)
         return ;
       }
 
@@ -180,7 +186,7 @@ export function RegistrarForm() {
           </div>
 
           {/* Form card */}
-          <div className="p-6 sm:p-8 border-2 shadow-xl">
+          <div className="p-6 sm:p-8 border-2 shadow-xl  rounded-lg">
             {!submitted ? (
               <form onSubmit={showPaymentInfo ? handleSubmit : handleGoToPay} className="space-y-5 sm:space-y-6">
                 <div className="grid sm:grid-cols-2 gap-5 sm:gap-6">
@@ -270,16 +276,16 @@ export function RegistrarForm() {
                     id="cantidad"
                     name="cantidad"
                     type="number"
-                    min="1"
-                    max="3"
+                    min="0"
+                    max="4"
                     required
                     value={formData.cantidad}
                     onChange={handleChange}
                     className="h-11 sm:h-12 text-sm sm:text-base"
-                    placeholder="1, 2 o 3"
+                    placeholder="1, 2, 3 o 4"
                     disabled={showPaymentInfo}
                   />
-                  <p className="text-xs text-muted-foreground">Máximo 3 entradas por persona</p>
+                  <p className="text-xs text-muted-foreground">Máximo 4 entradas por persona</p>
                 </div>
 
                  {/* Sección de información de pago y carga de archivo */}
@@ -339,16 +345,18 @@ export function RegistrarForm() {
                               type="file"
                               onChange={handleFileChange}
                               className="hidden"
+                              max={5 * 1024 * 1024}
                               accept="image/*,.pdf"
                               required  // <- sólo requerido si no hay file seleccionado
                             />
                             <Label
                               htmlFor="archivo"
                               className="flex items-center justify-center gap-2 h-24 sm:h-28 border-2 border-dashed border-primary/50 rounded-lg cursor-pointer hover:border-primary hover:bg-primary/5 transition-colors"
+                              
                             >
                               <Upload className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
                               <span className="text-sm sm:text-base text-foreground font-medium">
-                                Subir comprobante (máx. 10MB)
+                                Subir comprobante (máx. 5MB)
                               </span>
                             </Label>
                           </div>
@@ -379,9 +387,9 @@ export function RegistrarForm() {
                 <div className="pt-2 sm:pt-4">
                   {!showPaymentInfo ? (
                     <Button
-                      type="button"
-                      //onSubmit={handleGoToPay}
-                      onClick = {handleGoToPay}
+                      type="submit"
+                      onSubmit={handleGoToPay}
+                      //onClick = {handleGoToPay}
                       size="lg"
                       className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base sm:text-lg h-12 sm:h-14 rounded-full"
                     >
@@ -392,6 +400,8 @@ export function RegistrarForm() {
                       type="submit"
                       size="lg"
                       className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base sm:text-lg h-12 sm:h-14 rounded-full"
+                      disabled = {!file || file.size > 5 * 1024 * 1024}
+                      
                     >
                       CONFIRMAR REGISTRO
                     </Button>

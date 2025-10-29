@@ -35,6 +35,7 @@ export async function registrarUsuario(data: {
 export async function registrarReserva(data: {
     nombre: string;
     apellido: string;
+    dni: string;
     telefono: string;
     email: string;
     cantidad: number;
@@ -47,6 +48,7 @@ export async function registrarReserva(data: {
       const {data: insertData, error} = await supabase.from('reservas').insert({
         nombre: data.nombre,
         apellido: data.apellido,
+        dni: data.dni,
         telefono: data.telefono,
         email: data.email,
         cantidad: data.cantidad,
@@ -73,6 +75,7 @@ export async function registrarReserva(data: {
 export async function registrarReserva1(formData: {
     nombre: string;
     apellido: string;
+    dni: number;
     telefono: string;
     mail: string;
     cantidad: number;
@@ -81,6 +84,7 @@ export async function registrarReserva1(formData: {
     const {data, error} = await supabase.rpc('EP_verificarYReservar',{
         p_nombre: formData.nombre,
         p_apellido: formData.apellido,
+        p_dni: formData.dni,
         p_telefono: formData.telefono,
         p_email: formData.mail,
         p_cantidad: formData.cantidad,

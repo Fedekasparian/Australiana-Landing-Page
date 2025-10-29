@@ -24,7 +24,7 @@ export function EventInfo() {
               </div>
               <div>
                 <h3 className="font-bold text-base sm:text-lg mb-1">Fecha</h3>
-                <p className="text-sm sm:text-base text-muted-foreground">Sábado 15 de Marzo, 2025</p>
+                <p className="text-sm sm:text-base text-muted-foreground">Sábado 29 de Noviembre, 2025</p>
               </div>
             </div>
           </Card>
@@ -36,7 +36,7 @@ export function EventInfo() {
               </div>
               <div>
                 <h3 className="font-bold text-base sm:text-lg mb-1">Horarios</h3>
-                <p className="text-sm sm:text-base text-muted-foreground">14:00 - 02:00 hs</p>
+                <p className="text-sm sm:text-base text-muted-foreground">9:00 - 21:30 hs / 01:00 - 06:00 hs</p>
               </div>
             </div>
           </Card>
@@ -82,7 +82,7 @@ export function EventInfo() {
                 <Trophy className="w-6 h-6 sm:w-8 sm:h-8 text-white flex-shrink-0" />
                 <h3 className="text-2xl sm:text-3xl font-black text-white leading-tight">TARDE DEPORTIVA</h3>
               </div>
-              <p className="text-sm sm:text-base text-white/90 font-medium">14:00 - 20:00 hs</p>
+              <p className="text-sm sm:text-base text-white/90 font-medium">09:00 - 21:30 hs</p>
             </div>
             <div className="p-5 sm:p-6 space-y-3 sm:space-y-4">
               <div className="flex items-start gap-3">
@@ -90,7 +90,7 @@ export function EventInfo() {
                 <div>
                   <h4 className="font-bold text-sm sm:text-base mb-1">Torneos Deportivos</h4>
                   <p className="text-muted-foreground text-xs sm:text-sm">
-                    Partidos de rugby y fútbol femenino con clubes de toda la zona
+                    Partidos de rugby, fútbol femenino y hockey con clubes de toda la zona
                   </p>
                 </div>
               </div>
@@ -99,7 +99,7 @@ export function EventInfo() {
                 <div>
                   <h4 className="font-bold text-sm sm:text-base mb-1">Actividades</h4>
                   <p className="text-muted-foreground text-xs sm:text-sm">
-                    Food trucks, juegos, música en vivo y mucho más
+                    Deportes, juegos, música en vivo y mucho más
                   </p>
                 </div>
               </div>
@@ -122,7 +122,7 @@ export function EventInfo() {
                 <Music className="w-6 h-6 sm:w-8 sm:h-8 text-white flex-shrink-0" />
                 <h3 className="text-2xl sm:text-3xl font-black text-white leading-tight">FIESTA NOCTURNA</h3>
               </div>
-              <p className="text-sm sm:text-base text-white/90 font-medium">21:00 - 02:00 hs</p>
+              <p className="text-sm sm:text-base text-white/90 font-medium">01:00 - 06:00 hs</p>
             </div>
             <div className="p-5 sm:p-6 space-y-3 sm:space-y-4">
               <div className="flex items-start gap-3">

@@ -22,6 +22,7 @@ export function RegistrarForm() {
   const [formData, setFormData] = useState({
     nombre: "",
     apellido: "",
+    dni: "",
     telefono: "",
     mail: "",
     cantidad: 1,
@@ -44,6 +45,7 @@ export function RegistrarForm() {
       const response = await registrarReserva({
       nombre: formData.nombre,
       apellido: formData.apellido,
+      dni: formData.dni,
       telefono: formData.telefono,
       email: formData.mail,
       cantidad: formData.cantidad,
@@ -119,6 +121,8 @@ export function RegistrarForm() {
       setFile(selectedFile)
       }
     }
+
+  // Eliminar archivo
   const removeFile = () => {
     console.log("Removiendo archivo")
     setFile(null)
@@ -132,15 +136,49 @@ export function RegistrarForm() {
         alert ("Por favor, subí el comprobante de pago.")
         return false;
       }else{
-        const filePath = `preventa1/${idForm}_${formData.nombre}_${formData.apellido}`;
-        
+
+        // Helpers seguros
+        const removeAccents = (s: string | undefined | null) =>
+          (s ?? '').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+
+        const sanitizeSegment = (s: string | undefined | null) =>
+          removeAccents(s)
+            .trim()
+            .replace(/\s+/g, '_')           // espacios -> _
+            .replace(/[^A-Za-z0-9._-]/g, '')// solo caracteres seguros
+            .replace(/_+/g, '_')            // compacta __
+            .replace(/^_+|_+$/g, '');       // trim _
+
+        const buildFilePath = (folder: string, nombre: string, apellido: string, dni:string) => {
+          const base = `${idForm}_${sanitizeSegment(nombre)}_${sanitizeSegment(apellido)}_${sanitizeSegment(dni)}`;
+          const ext  = (file.name.split('.').pop() || 'pdf').toLowerCase();
+          return `${folder}/${base}.${ext}`; // sin “/” inicial
+        };
+
+        // Uso:
+        const nombre = formData.nombre;
+        const apellido = formData.apellido;
+        const dni = formData.dni;
+        const filePath = buildFilePath('preventa1', nombre, apellido, dni);
+
+        /*const removeAccents = (s: string) => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '');  //Saca acentos del texto
+        const cleanText = (s: string) =>(s ?? '').trim().replace(/\s{2,}/g, ' '); //Saca espacios repetidos
+        const nombre = removeAccents(formData.nombre)
+        const apellido = removeAccents(formData.apellido)
+        const nombreLimpio = cleanText(nombre)
+        const apeLimpio = cleanText(apellido)
+
+
+        alert(formData.apellido)
+        const filePath = `preventa1/${idForm}_${nombreLimpio}_${apeLimpio}`;
+        */
         console.log("filePath:", filePath)
         const { error: uploadError } = await supabase.storage
         .from('comprobantes')
         .upload(filePath, file)
         
         if (uploadError) {
-          alert("Error al subir el archivo. \n Por favor refreseque e intente nuevamente")
+          alert("Error al subir el archivo. \nPor favor refresque e intente nuevamente")
           setComprobanteEnviado(false)
           return false;
         }
@@ -240,7 +278,31 @@ export function RegistrarForm() {
                   </div>
 
                 </div>
-
+                {/* // DNI componente */}
+                <div className="space-y-2">
+                  <Label htmlFor="dni" className="text-sm sm:text-base font-bold">
+                    DNI *
+                  </Label>
+                  <Input
+                    id="dni"
+                    name="dni"
+                    type="text"
+                    min="0"
+                    //pattern="\d{8}"
+                    minLength={8}
+                    maxLength={8}
+                    required
+                    value={formData.dni}
+                    onChange={handleChange}
+                    onInvalid={(e) =>
+                       e.currentTarget.setCustomValidity("Ingrese 8 dígitos sin puntos ni guiones")
+                      }
+                    onInput={(e) => e.currentTarget.setCustomValidity("")} // limpia el msg al tipear
+                    className="h-11 sm:h-12 text-sm sm:text-base"
+                    placeholder="Ingrese su DNI sin puntos ni guiones"
+                    disabled={showPaymentInfo}
+                  />
+                </div>
                 {/* // Teléfono componente */}
                 <div className="space-y-2">
                   <Label htmlFor="telefono" className="text-sm sm:text-base font-bold">

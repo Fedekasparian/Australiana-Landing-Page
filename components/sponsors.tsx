@@ -2,6 +2,7 @@ import Image from "next/image"
 import { Card } from "@/components/ui/card"
 import { Mail } from "lucide-react"
 
+
 export function Sponsors() {
   const prioritySponsors = [
     { name: "Sponsor Prioritario 1", logo: "/imperial.png" },
@@ -15,13 +16,13 @@ export function Sponsors() {
     { name: "Sponsor 3", logo: "/carpano.png" },
     { name: "Sponsor 4", logo: "/blu.png" },
     { name: "Sponsor 5", logo: "/sernova.png" },
-    { name: "Sponsor 9", logo: "/speedancho.png" },
-    { name: "Sponsor 9", logo: "/botta.png" },
-    { name: "Sponsor 9", logo: "/mersagro.png" },
-    { name: "Sponsor 9", logo: "/cimes.png" },
-    { name: "Sponsor 9", logo: "/mariodeluca.png" },
+    { name: "Sponsor 9", logo: "/SPEEDANCHO.png" },
+    { name: "Sponsor 9", logo: "/BOTTA.png" },
+    { name: "Sponsor 9", logo: "/MERSAGRO.png" },
+    { name: "Sponsor 9", logo: "/CIMES.png" },
+    { name: "Sponsor 9", logo: "/MARIODELUCA.png" },
     { name: "Sponsor 9", logo: "/bastard.png" },
-    { name: "Sponsor 9", logo: "/quimate.png" },
+    { name: "Sponsor 9", logo: "/QUIMATE.png" },
   ]
 
   return (

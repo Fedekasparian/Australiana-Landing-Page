@@ -36,7 +36,7 @@ export function EventInfo() {
               </div>
               <div>
                 <h3 className="font-bold text-base sm:text-lg mb-1">Horarios</h3>
-                <p className="text-sm sm:text-base text-muted-foreground">9:00 - 21:30 hs / 01:00 - 06:00 hs</p>
+                <p className="text-sm sm:text-base text-muted-foreground">9:00 - 21:30 hs</p>
               </div>
             </div>
           </Card>

@@ -33,6 +33,7 @@ export function RegistrarForm() {
   const [respuesta, setRespuesta] = useState("")
   const [idForm, setIdForm] = useState<number | null>(null)
   const [timer, setTimer] = useState<NodeJS.Timeout | null>(null)
+  const [comprpobanteEnviado, setComprobanteEnviado] = useState(false)
 
 
 
@@ -67,32 +68,35 @@ export function RegistrarForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     
     e.preventDefault()
-    alert("¡Enviando tu pago!")
-    handleConfirmacionPago();
+    setComprobanteEnviado(true)
     // const response = await cargarPago({
-    //   idForm: idForm!,
-    //   urlArchivo: formData.archivo,
-    //   })
-    //Llamo a funcion en app/actions/register.ts para insertar en la bae de datoss
-
+      //   idForm: idForm!,
+      //   urlArchivo: formData.archivo,
+      //   })
+      //Llamo a funcion en app/actions/register.ts para insertar en la bae de datoss
+      
     try{
       //Reset del formulario
-      setTimeout(() => {
-        setSubmitted(false)
-        setFormData({ nombre: "", apellido: "", telefono: "", mail: "", cantidad: 1, archivo: ""   })
-        setFile(null)
-        setShowPaymentInfo(false)
-      }, 10000)
+      handleConfirmacionPago();
+
+        /*setTimeout(() => {
+          setSubmitted(false)
+          setFormData({ nombre: "", apellido: "", telefono: "", mail: "", cantidad: 1, archivo: ""   })
+          setFile(null)
+          setShowPaymentInfo(false)
+        }, 5000)*/
     
 
     }catch (error:any) {
-      alert("Error al registrar el usuario: " + error.message)
+      alert("Error al registrar el usuario: " + error.message + ". \n Refresque la pagina e intente nuevamente.")
       setSubmitted(false)
     }
   }
 
   // Manejador de cambios de los inputs
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+
+
 
     const value =e.target.value
     e.target.type === "number" ? Number.parseInt(e.target.value) : e.target.value
@@ -101,8 +105,6 @@ export function RegistrarForm() {
       [e.target.name]: value,
     }))
     }
-  
-
 
   // Manejador de archivo
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -124,30 +126,33 @@ export function RegistrarForm() {
   }
 
   const handleConfirmacionPago = async () => {
-    if (!file) {
-      alert ("Por favor, subí el comprobante de pago.")
-      return;
-    }else{
-        const filePath = `preventa1/${idForm}_${formData.nombre}_${formData.apellido}`;
+    try{
 
+      if (!file) {
+        alert ("Por favor, subí el comprobante de pago.")
+        return false;
+      }else{
+        const filePath = `preventa1/${idForm}_${formData.nombre}_${formData.apellido}`;
+        
         console.log("filePath:", filePath)
         const { error: uploadError } = await supabase.storage
         .from('comprobantes')
         .upload(filePath, file)
-
+        
         if (uploadError) {
-          alert("Error al subir el archivo: " + uploadError.message)
-          return;
+          alert("Error al subir el archivo. \n Por favor refreseque e intente nuevamente")
+          setComprobanteEnviado(false)
+          return false;
         }
-
-
+        
+        
         //Obtener url publica del archivo subido
         const { data: {publicUrl} } = supabase.storage
         .from('comprobantes')
         .getPublicUrl(filePath)
-
+        
         console.log("publicUrl:", publicUrl)
-    
+        
         // Actualizar la reserva en la base de datos
         const {error: updateError} = await supabase
         .from('reservas')
@@ -156,13 +161,18 @@ export function RegistrarForm() {
         
         if (updateError) {
           alert("Error al actualizar la reserva: " + updateError.message)
-          return;
+          return false;
         }
-
+        
         setSubmitted(true)
-        return ;
+        document.getElementById("registro")?.scrollIntoView()
+        return true;
       }
-
+      
+    }catch (error:any) {
+      setComprobanteEnviado(false)
+      return error;
+    }
 
 
   }
@@ -400,7 +410,7 @@ export function RegistrarForm() {
                       type="submit"
                       size="lg"
                       className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base sm:text-lg h-12 sm:h-14 rounded-full"
-                      disabled = {!file || file.size > 5 * 1024 * 1024}
+                      disabled = {!file || file.size > 5 * 1024 * 1024 || comprpobanteEnviado}
                       
                     >
                       CONFIRMAR REGISTRO

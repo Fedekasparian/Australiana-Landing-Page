@@ -3,19 +3,22 @@ import { Card } from "@/components/ui/card"
 import { Mail } from "lucide-react"
 
 export function Sponsors() {
-  const sponsors = [
-    { name: "Sponsor 1", logo: "/generic-sponsor-logo-1.png" },
-    { name: "Sponsor 2", logo: "/generic-sponsor-logo-2.png" },
-    { name: "Sponsor 3", logo: "/generic-sponsor-logo-3.png" },
-    { name: "Sponsor 4", logo: "/sponsor-logo-4.jpg" },
-    { name: "Sponsor 5", logo: "/sponsor-logo-5.png" },
-    { name: "Sponsor 6", logo: "/sponsor-logo-6.jpg" },
-    { name: "Sponsor 7", logo: "/generic-sponsor-logo-1.png" },
-    { name: "Sponsor 8", logo: "/generic-sponsor-logo-2.png" },
-    { name: "Sponsor 9", logo: "/generic-sponsor-logo-3.png" },
-    { name: "Sponsor 10", logo: "/sponsor-logo-4.jpg" },
-    { name: "Sponsor 11", logo: "/sponsor-logo-5.png" },
-    { name: "Sponsor 12", logo: "/sponsor-logo-6.jpg" },
+  const prioritySponsors = [
+    { name: "Sponsor Prioritario 1", logo: "/generic-sponsor-logo-1.png" },
+    { name: "Sponsor Prioritario 2", logo: "/generic-sponsor-logo-2.png" },
+    { name: "Sponsor Prioritario 3", logo: "/generic-sponsor-logo-3.png" },
+  ]
+
+  const generalSponsors = [
+    { name: "Sponsor 1", logo: "/sponsor-logo-4.jpg" },
+    { name: "Sponsor 2", logo: "/sponsor-logo-5.png" },
+    { name: "Sponsor 3", logo: "/sponsor-logo-6.jpg" },
+    { name: "Sponsor 4", logo: "/generic-sponsor-logo-1.png" },
+    { name: "Sponsor 5", logo: "/generic-sponsor-logo-2.png" },
+    { name: "Sponsor 6", logo: "/generic-sponsor-logo-3.png" },
+    { name: "Sponsor 7", logo: "/sponsor-logo-4.jpg" },
+    { name: "Sponsor 8", logo: "/sponsor-logo-5.png" },
+    { name: "Sponsor 9", logo: "/sponsor-logo-6.jpg" },
   ]
 
   return (
@@ -28,21 +31,44 @@ export function Sponsors() {
           <p className="text-sm sm:text-base text-muted-foreground">Gracias a quienes hacen posible este evento</p>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6">
-          {sponsors.map((sponsor, index) => (
-            <Card
-              key={index}
-              className="p-4 sm:p-6 flex items-center justify-center hover:shadow-lg transition-shadow bg-background"
-            >
-              <Image
-                src={sponsor.logo || "/placeholder.svg"}
-                alt={sponsor.name}
-                width={160}
-                height={80}
-                className="w-full h-auto object-contain grayscale hover:grayscale-0 transition-all"
-              />
-            </Card>
-          ))}
+        <div className="mb-10 sm:mb-12">
+          <h3 className="text-lg sm:text-xl font-bold text-center text-foreground/80 mb-6">SPONSORS PRIORITARIOS</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-5xl mx-auto">
+            {prioritySponsors.map((sponsor, index) => (
+              <Card
+                key={index}
+                className="p-8 sm:p-10 flex items-center justify-center hover:shadow-xl transition-shadow bg-background"
+              >
+                <Image
+                  src={sponsor.logo || "/placeholder.svg"}
+                  alt={sponsor.name}
+                  width={240}
+                  height={120}
+                  className="w-full h-auto object-contain grayscale hover:grayscale-0 transition-all"
+                />
+              </Card>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <h3 className="text-lg sm:text-xl font-bold text-center text-foreground/80 mb-6">SPONSORS GENERALES</h3>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6">
+            {generalSponsors.map((sponsor, index) => (
+              <Card
+                key={index}
+                className="p-4 sm:p-6 flex items-center justify-center hover:shadow-lg transition-shadow bg-background"
+              >
+                <Image
+                  src={sponsor.logo || "/placeholder.svg"}
+                  alt={sponsor.name}
+                  width={160}
+                  height={80}
+                  className="w-full h-auto object-contain grayscale hover:grayscale-0 transition-all"
+                />
+              </Card>
+            ))}
+          </div>
         </div>
 
         <div className="mt-10 sm:mt-12 text-center">

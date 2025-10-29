@@ -4,53 +4,60 @@ import { Clock, Trophy, Music, Users, Utensils } from "lucide-react";
 export function Schedule() {
   const scheduleItems = [
     {
-      time: "14:00",
-      title: "Apertura del Evento",
-      description: "Comienza la jornada deportiva",
+      time: "9:00",
+      title: "LLEGADA EQUIPOS",
+      description: "Alta en mesa de control",
       icon: Users,
       color: "primary",
     },
     {
-      time: "14:30",
-      title: "Inicio Torneos",
-      description: "Comienzan los partidos de rugby y fútbol femenino",
+      time: "10:30",
+      title: "Inicio Seven Del Oeste",
+      description: "Fase de Grupos - Rugby 7s - Futbol Fem. 7s - Hockey 7s",
       icon: Trophy,
       color: "secondary",
     },
     {
-      time: "16:00",
-      title: "Food Trucks & Actividades",
-      description: "Gastronomía y entretenimiento para toda la familia",
+      time: "15:00",
+      title: "INICIO PLAYOFFS",
+      description: "Sorteo y Pelea directa por su lugar en las Finales",
       icon: Utensils,
       color: "primary",
     },
     {
-      time: "18:00",
-      title: "Finales Deportivas",
-      description: "Partidos finales y entrega de premios",
+      time: "17:00",
+      title: "Finales Bronce y Plata",
+      description: "Comienzan a definirse los campeones",
       icon: Trophy,
       color: "secondary",
     },
     {
-      time: "21:00",
-      title: "Comienza la Fiesta",
-      description: "Apertura de la pista de baile y barra premium",
-      icon: Music,
+      time: "18:00",
+      title: "Finales ORO",
+      description: "Cierre emocionante por la Dorada",
+      icon: Trophy,
       color: "primary",
     },
     {
-      time: "22:00",
-      title: "DJ Set Principal",
-      description: "Los mejores DJs de la zona en vivo",
+      time: "19:00",
+      title: "Ceremonia y After Seven",
+      description: "Entrega  de reconocimientos con DJ en vivo",
       icon: Music,
       color: "secondary",
     },
     {
-      time: "02:00",
-      title: "Cierre del Evento",
-      description: "Fin de la jornada",
+      time: "21:30",
+      title: "Cierre del Seven del Oeste",
+      description: "Momento de recuperar energías y prepararse para lo que viene...",
       icon: Clock,
       color: "primary",
+    },
+    {
+      time: "1:00",
+      title: "APERTURA DE PUERTAS",
+      description: "Comienza la fiesta mas divertida del año, a bailar!",
+      icon: Clock,
+      color: "secondary",
     },
   ]
 
@@ -62,7 +69,7 @@ export function Schedule() {
             CRONOGRAMA DEL <span className="text-primary">EVENTO</span>
           </h2>
           <p className="text-base sm:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto px-4">
-            Planificá tu día para no perderte nada
+            Vení a disfrutar de nuestros torneos
           </p>
         </div>
 

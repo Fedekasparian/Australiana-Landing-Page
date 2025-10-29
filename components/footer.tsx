@@ -28,6 +28,16 @@ export function Footer() {
                 </a>
               </li>
               <li>
+                <a href="#cronograma" className="hover:text-primary transition-colors">
+                  Cronograma
+                </a>
+              </li>
+              <li>
+                <a href="#sponsors" className="hover:text-primary transition-colors">
+                  Nuestros sponsors
+                </a>
+              </li>
+              <li>
                 <a href="mailto:info@australiana.com" className="hover:text-primary transition-colors">
                   Contacto
                 </a>
@@ -40,7 +50,7 @@ export function Footer() {
             <h4 className="font-bold text-base sm:text-lg">Seguinos</h4>
             <div className="flex gap-3 sm:gap-4">
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/fiestaaustraliana?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-white/10 hover:bg-primary p-2.5 sm:p-3 rounded-full transition-colors"
@@ -49,7 +59,7 @@ export function Footer() {
                 <Instagram className="w-4 h-4 sm:w-5 sm:h-5" />
               </a>
               <a
-                href="https://facebook.com"
+                href="https://www.facebook.com/FiestaAustraliana"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-white/10 hover:bg-primary p-2.5 sm:p-3 rounded-full transition-colors"

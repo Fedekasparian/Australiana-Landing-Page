@@ -5,24 +5,27 @@ import { Mail } from "lucide-react"
 
 export function Sponsors() {
   const prioritySponsors = [
-    { name: "Sponsor Prioritario 1", logo: "/imperial.png" },
+    { name: "Sponsor Prioritario 1", logo: "/imperial.svg" },
+    { name: "Sponsor Prioritario 1", logo: "/fernetbranca.svg" },
   ]
 
   const generalSponsors = [
-    { name: "Sponsor 1", logo: "/branca.png" },
-    { name: "Sponsor 2", logo: "/energiuancho.png" },
-    { name: "Sponsor 8", logo: "/ñuke.png" },
     { name: "Sponsor 6", logo: "/ramazzoti.png" },
     { name: "Sponsor 3", logo: "/carpano.png" },
+    { name: "Sponsor 2", logo: "/energiuancho.png" },
+    { name: "Sponsor 8", logo: "/ñuke.png" },
     { name: "Sponsor 4", logo: "/blu.png" },
     { name: "Sponsor 5", logo: "/sernova.png" },
-    { name: "Sponsor 9", logo: "/SPEEDANCHO.png" },
     { name: "Sponsor 9", logo: "/BOTTA.png" },
-    { name: "Sponsor 9", logo: "/MERSAGRO.png" },
-    { name: "Sponsor 9", logo: "/CIMES.png" },
-    { name: "Sponsor 9", logo: "/MARIODELUCA.png" },
+    { name: "Sponsor 9", logo: "/speedancho2.png" },
+    { name: "Sponsor 9", logo: "/quimate.png" },
     { name: "Sponsor 9", logo: "/bastard.png" },
-    { name: "Sponsor 9", logo: "/QUIMATE.png" },
+    { name: "Sponsor 9", logo: "/mersagro.png" },
+    { name: "Sponsor 9", logo: "/mariodeluca.png" },
+    { name: "Sponsor 9", logo: "/deseado.png" },
+    { name: "Sponsor 9", logo: "/hielo.svg" },
+    { name: "Sponsor 9", logo: "/cimes.png" },
+    { name: "Sponsor 9", logo: "/solohuevo.png" },
   ]
 
   return (
@@ -48,7 +51,7 @@ export function Sponsors() {
                   alt={sponsor.name}
                   width={240}
                   height={120}
-                  className="w-full h-[120px] object-contain grayscale hover:grayscale-0 transition-all"
+                  className="w-[250] h-[180px] object-contain "
                 />
               </Card>
             ))}
@@ -57,18 +60,18 @@ export function Sponsors() {
 
         <div>
           {/* <h3 className="text-lg sm:text-xl font-bold text-center text-foreground/80 mb-6">SPONSORS GENERALES</h3> */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6">
+          <div className="grid grid-cols-5 grid-rows-3 gap-6 ">
             {generalSponsors.map((sponsor, index) => (
               <Card
                 key={index}
-                className="h[100px] p-4 sm:p-6 flex items-center justify-center hover:shadow-lg transition-shadow bg-background"
+                className="h[100px] p-6 flex items-center justify-center hover:shadow-lg transition-shadow bg-background"
               >
                 <Image
                   src={sponsor.logo || "/placeholder.svg"}
                   alt={sponsor.name}
                   width={160}
                   height={80}
-                  className="w-full h-[120px] object-contain grayscale hover:grayscale-0 transition-all"
+                  className="w-full h-[120px] object-contain "
                 />
               </Card>
             ))}

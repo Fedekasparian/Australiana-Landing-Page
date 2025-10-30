@@ -227,7 +227,7 @@ export function RegistrarForm() {
               PROXIMAMENTE
             </div>
             <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-foreground tracking-tight leading-tight px-4">
-              REGISTRATE <span className="text-primary">AHORA</span>
+              COMPRA TU <span className="text-primary">ENTRADA</span>
             </h2>
             <p className="text-base sm:text-lg lg:text-xl text-muted-foreground px-4">
               Completá el formulario para acceder a la preventa y asegurar tu lugar
@@ -317,7 +317,7 @@ export function RegistrarForm() {
                     value={formData.telefono}
                     onChange={handleChange}
                     className="h-11 sm:h-12 text-sm sm:text-base"
-                    placeholder="+54 9 11 1234-5678"
+                    placeholder="2324699541"
                     disabled={showPaymentInfo}
                   />
                 </div>
@@ -375,7 +375,7 @@ export function RegistrarForm() {
                       <div className="space-y-3 text-sm sm:text-base">
                         <div className="bg-background p-3 sm:p-4 rounded-lg">
                           <p className="text-xs text-muted-foreground mb-1">ALIAS</p>
-                          <p className="font-bold text-foreground">australiana.preventa</p>
+                          <p className="font-bold text-foreground">australiana.mp</p>
                         </div>
 
                         <div className="bg-background p-3 sm:p-4 rounded-lg">
@@ -391,11 +391,11 @@ export function RegistrarForm() {
                         <div className="bg-background p-3 sm:p-4 rounded-lg">
                           <p className="text-xs text-muted-foreground mb-1">MONTO A TRANSFERIR</p>
                           <p className="font-bold text-primary text-lg sm:text-xl">
-                            ${(formData.cantidad * 5000).toLocaleString("es-AR")}
+                            ${(formData.cantidad * 7000).toLocaleString("es-AR")}
                           </p>
                           <p className="text-xs text-muted-foreground mt-1">
                             {formData.cantidad} {formData.cantidad === 1 ? "entrada" : "entradas"} ×
-                            $5.000
+                            $7.000
                           </p>
                         </div>
                       </div>
@@ -484,8 +484,9 @@ export function RegistrarForm() {
                 </div>
 
                 <p className="text-xs sm:text-sm text-muted-foreground text-center">
-                  Al registrarte, aceptás recibir información sobre el evento
+                  Luego de verificar el pago te llegará un mail con la confirmación del mismo.
                 </p>
+
               </form>
             ) : (
               <div className="text-center py-8 sm:py-12 space-y-3 sm:space-y-4 animate-fade-in">
@@ -494,22 +495,35 @@ export function RegistrarForm() {
                 </div>
                 <h3 className="text-xl sm:text-2xl font-bold text-foreground">¡Registro Exitoso!</h3>
                 <p className="text-sm sm:text-base text-muted-foreground px-4">
-                  Recibimos tu comprobante. Te enviaremos un email con la confirmación y más información del evento.
+                  Recibimos tu comprobante. Te enviaremos un email luego de la confirmación del mismo.
                 </p>
               </div>
             )}
           </div>
 
+
+
+
           {/* Additional info */}
           <div className="mt-6 sm:mt-8 text-center px-4">
+            
+            <p className="text-xs sm:text-sm text-muted-foreground">
+              <strong className="text-foreground">Importante:</strong> Entrada con preventa anticipada. Cupos limitados.
+              Mayores de 18 años con DNI.
+            </p>
+          </div>
+        </Card>
+                  {/* Additional info */}
+        <div className="mt-8 sm:mt-10 lg:mt-12 text-center px-4">
+          <Card className="inline-block p-4 sm:p-6 bg-muted max-w-6xl">
             <p className="text-xs sm:text-sm text-muted-foreground">
               ¿Problemas con el registro? Escribinos a{" "}
               <a href="mailto:info@australiana.com" className="text-primary font-bold hover:underline">
                 info@australiana.com
               </a>
             </p>
-          </div>
-        </Card>
+          </Card>
+        </div>
       </div>
     </section>
   )

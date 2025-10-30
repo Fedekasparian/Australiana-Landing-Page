@@ -14,11 +14,15 @@ export default function CountdownTimer({ initialMinutes = 10 }) {
   const seconds = timeLeft % 60;
 
   return (
-    <div className="fixed top-5 right-5 z-50 pointer-events-none">
-      <div className="bg-primary text-primary-foreground px-5 py-3 rounded-xl shadow-lg text-center">
-        <p className="text-xs opacity-80">⏳ Tiempo restante</p>
-        <p className="text-2xl font-bold">
-          {minutes.toString().padStart(2, "0")}:
+    <div className="fixed top-6 right-6 z-50 pointer-events-none">
+      <div 
+        className="bg-primary text-primary-foreground px-7 py-5 rounded-2xl shadow-2xl text-center ring-1 ring-black/10"
+        aria-live="polite"
+      >
+        <p className="text-sm opacity-90 tracking-wide">⏳ Tiempo restante</p>
+        <p className="text-5xl font-extrabold leading-none mt-1 tabular-nums">
+          {minutes.toString().padStart(2, "0")}
+          <span className="px-1">:</span>
           {seconds.toString().padStart(2, "0")}
         </p>
       </div>

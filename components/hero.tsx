@@ -31,11 +31,11 @@ return (
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div className="relative z-10 container mx-auto px-10 sm:px-15 lg:px-15 text-center">
         <div className="space-y-6 sm:space-y-8 animate-fade-in-up">
           {/* Badge */}
           <div className="inline-block">
-            <div className="bg-primary text-primary-foreground px-4 py-1.5 sm:px-6 sm:py-2 rounded-full font-bold text-xs sm:text-sm tracking-wider">
+            <div className="bg-primary text-primary-foreground px-8 py-3 rounded-full font-extrabold text-lg tracking-widest shadow-md">
               EDICION XIV
             </div>
           </div>
@@ -59,10 +59,10 @@ return (
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-stretch sm:items-center pt-6 sm:pt-8 px-4 sm:px-0">
             <Button
               size="lg"
-              className="bg-primary hover:bg-primary/90 hover:text-white hover:border-white text-primary-foreground font-bold text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 rounded-full w-full sm:w-auto"
+              className="bg-secondary border-2 border-white hover:bg-white/90 hover:text-secondary hover:border-white text-primary-foreground font-bold text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 rounded-full w-full sm:w-auto"
               onClick={scrollToInfo}
             >
-              VER INFO DEL EVENTO
+              INFO DEL EVENTO
             </Button>
             <Button
               size="lg"
@@ -74,7 +74,7 @@ return (
             </Button>
             <Button
               size="lg"
-              className="bg-primary hover:bg-primary/90 hover:text-white hover:border-white text-primary-foreground font-bold text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 rounded-full w-full sm:w-auto"
+              className="bg-secondary border-2 border-white hover:bg-white/90 hover:text-secondary hover:border-white text-primary-foreground font-bold text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 rounded-full w-full sm:w-auto"
               onClick={scrollToSchedule}
             >
               CRONOGRAMA
@@ -82,10 +82,10 @@ return (
             <Button
               size="lg"
               variant="outline"
-              className="border-2 border-white text-white hover:bg-white hover:text-secondary font-bold text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 rounded-full bg-transparent w-full sm:w-auto"
+              className="bg-primary border-2 border-primary text-white hover:bg-white hover:text-secondary hover:border-white font-bold text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 rounded-full w-full sm:w-auto"
               onClick={scrollToRegister}
             >
-              COMPRAR EARLY BIRDS
+              COMPRA TU ENTRADA
             </Button>
           </div>
         </div>

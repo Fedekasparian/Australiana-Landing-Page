@@ -1,5 +1,5 @@
 import { Card } from "@/components/ui/card"
-import { Calendar, Clock, MapPin, Users, Music, Trophy } from "lucide-react"
+import { Calendar, Clock, MapPin, Users, Music, Trophy, PartyPopper } from "lucide-react"
 
 export function EventInfo() {
   return (
@@ -10,9 +10,9 @@ export function EventInfo() {
           <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-foreground tracking-tight leading-tight px-4">
             INFO DEL <span className="text-primary">EVENTO</span>
           </h2>
-          <p className="text-base sm:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto px-4">
+          {/* <p className="text-base sm:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto px-4">
             Un día completo de deporte, diversión y fiesta que no te podés perder
-          </p>
+          </p> */}
         </div>
 
         {/* Key info cards */}
@@ -36,7 +36,7 @@ export function EventInfo() {
               </div>
               <div>
                 <h3 className="font-bold text-base sm:text-lg mb-1">Horarios</h3>
-                <p className="text-sm sm:text-base text-muted-foreground">9:00 - 21:30 hs</p>
+                <p className="text-sm sm:text-base text-muted-foreground">9:00 - 21:30 hs / 1:00 - 6:00 hs</p>
               </div>
             </div>
           </Card>
@@ -99,7 +99,7 @@ export function EventInfo() {
                 <div>
                   <h4 className="font-bold text-sm sm:text-base mb-1">Actividades</h4>
                   <p className="text-muted-foreground text-xs sm:text-sm">
-                    Deportes, juegos, música en vivo y mucho más
+                    Cantina, juegos, música en vivo y mucho más
                   </p>
                 </div>
               </div>
@@ -119,7 +119,7 @@ export function EventInfo() {
           <Card className="overflow-hidden border-2 hover:shadow-xl transition-shadow">
             <div className="bg-primary p-5 sm:p-6">
               <div className="flex items-center gap-2 sm:gap-3 mb-2">
-                <Music className="w-6 h-6 sm:w-8 sm:h-8 text-white flex-shrink-0" />
+                <PartyPopper className="w-6 h-6 sm:w-8 sm:h-8 text-white flex-shrink-0" />
                 <h3 className="text-2xl sm:text-3xl font-black text-white leading-tight">FIESTA NOCTURNA</h3>
               </div>
               <p className="text-sm sm:text-base text-white/90 font-medium">01:00 - 06:00 hs</p>
@@ -156,15 +156,7 @@ export function EventInfo() {
           </Card>
         </div>
 
-        {/* Additional info */}
-        <div className="mt-8 sm:mt-10 lg:mt-12 text-center px-4">
-          <Card className="inline-block p-4 sm:p-6 bg-muted max-w-3xl">
-            <p className="text-xs sm:text-sm text-muted-foreground">
-              <strong className="text-foreground">Importante:</strong> Entrada con preventa anticipada. Cupos limitados.
-              Mayores de 18 años con DNI.
-            </p>
-          </Card>
-        </div>
+      
       </div>
     </section>
   )

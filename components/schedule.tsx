@@ -1,5 +1,5 @@
 import { Card } from "@/components/ui/card";
-import { Clock, Trophy, Music, Users, Utensils } from "lucide-react";
+import { Clock, Trophy, Music, Users, Utensils, Medal, PartyPopper, Sun } from "lucide-react";
 
 export function Schedule() {
   const scheduleItems = [
@@ -12,51 +12,51 @@ export function Schedule() {
     },
     {
       time: "10:30",
-      title: "Inicio Seven Del Oeste",
+      title: "INICIO SEVEN DEL OESTE",
       description: "Fase de Grupos - Rugby 7s - Futbol Fem. 7s - Hockey 7s",
-      icon: Trophy,
+      icon: Sun,
       color: "secondary",
     },
     {
       time: "15:00",
       title: "INICIO PLAYOFFS",
       description: "Sorteo y Pelea directa por su lugar en las Finales",
-      icon: Utensils,
+      icon: Trophy,
       color: "primary",
     },
     {
       time: "17:00",
-      title: "Finales Bronce y Plata",
+      title: "FINALES BRONCE Y PLATA",
       description: "Comienzan a definirse los campeones",
       icon: Trophy,
       color: "secondary",
     },
     {
       time: "18:00",
-      title: "Finales ORO",
+      title: "FINALES ORO",
       description: "Cierre emocionante por la Dorada",
       icon: Trophy,
       color: "primary",
     },
     {
       time: "19:00",
-      title: "Ceremonia y After Seven",
+      title: "CEREMONIA Y AFTER SEVEN",
       description: "Entrega  de reconocimientos con DJ en vivo",
-      icon: Music,
+      icon: Medal,
       color: "secondary",
     },
     {
       time: "21:30",
-      title: "Cierre del Seven del Oeste",
+      title: "CIERRE SEVEN DEL OESTE",
       description: "Momento de recuperar energías y prepararse para lo que viene...",
       icon: Clock,
       color: "primary",
     },
     {
       time: "1:00",
-      title: "APERTURA DE PUERTAS",
-      description: "Comienza la fiesta mas divertida del año, a bailar!",
-      icon: Clock,
+      title: "FIESTA AUSTRALIANA",
+      description: "Comienzo de la fiesta mas esperada del año!",
+      icon: PartyPopper,
       color: "secondary",
     },
   ]

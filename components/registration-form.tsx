@@ -461,11 +461,13 @@ export function RegistrarForm() {
                     <Button
                       type="submit"
                       onSubmit={handleGoToPay}
+                      disabled
                       //onClick = {handleGoToPay}
                       size="lg"
                       className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base sm:text-lg h-12 sm:h-14 rounded-full"
                     >
-                      IR A PAGAR
+                      {/* IR A PAGAR */}
+                      PROXIMAMENTE
                     </Button>
                   ) : (
                     <Button

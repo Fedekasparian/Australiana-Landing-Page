@@ -38,7 +38,7 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a href="mailto:info@australiana.com" className="hover:text-primary transition-colors">
+                <a href="mailto:infoaustraliana@.com" className="hover:text-primary transition-colors">
                   Contacto
                 </a>
               </li>
@@ -68,7 +68,7 @@ export function Footer() {
                 <Facebook className="w-4 h-4 sm:w-5 sm:h-5" />
               </a>
               <a
-                href="mailto:info@australiana.com"
+                href="mailto:infoaustraliana@australiana.com"
                 className="bg-white/10 hover:bg-primary p-2.5 sm:p-3 rounded-full transition-colors"
                 aria-label="Email"
               >

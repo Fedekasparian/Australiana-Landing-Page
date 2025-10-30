@@ -86,7 +86,7 @@ export function Sponsors() {
               className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-bold text-base sm:text-lg transition-colors"
             >
               <Mail className="w-5 h-5" />
-              sponsors@fiestaustraliana.com
+              infoaustraliana@gmail.com
             </a>
           </div>
         </div>

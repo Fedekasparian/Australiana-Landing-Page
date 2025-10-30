@@ -223,7 +223,8 @@ export function RegistrarForm() {
           <div className="text-center mb-8 sm:mb-10 lg:mb-12 space-y-3 sm:space-y-4">
             <div className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-3 py-1.5 sm:px-4 sm:py-2 rounded-full font-bold text-xs sm:text-sm">
               <Ticket className="w-3 h-3 sm:w-4 sm:h-4" />
-              PREVENTA DISPONIBLE
+              {/* PREVENTA DISPONIBLE */}
+              PROXIMAMENTE
             </div>
             <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-foreground tracking-tight leading-tight px-4">
               REGISTRATE <span className="text-primary">AHORA</span>

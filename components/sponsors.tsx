@@ -18,13 +18,13 @@ export function Sponsors() {
     { name: "Sponsor 5", logo: "/sernova.png" },
     { name: "Sponsor 9", logo: "/BOTTA.png" },
     { name: "Sponsor 9", logo: "/speedancho2.png" },
-    { name: "Sponsor 9", logo: "/quimate.png" },
+    { name: "Sponsor 9", logo: "/QUIMATE.png" },
     { name: "Sponsor 9", logo: "/bastard.png" },
-    { name: "Sponsor 9", logo: "/mersagro.png" },
-    { name: "Sponsor 9", logo: "/mariodeluca.png" },
+    { name: "Sponsor 9", logo: "/MERSAGRO.png" },
+    { name: "Sponsor 9", logo: "/MARIODELUCA.png" },
     { name: "Sponsor 9", logo: "/deseado.png" },
     { name: "Sponsor 9", logo: "/hielo.svg" },
-    { name: "Sponsor 9", logo: "/cimes.png" },
+    { name: "Sponsor 9", logo: "/CIMES.png" },
     { name: "Sponsor 9", logo: "/solohuevo.png" },
   ]
 

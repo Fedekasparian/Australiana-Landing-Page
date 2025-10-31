@@ -39,42 +39,60 @@ export function Sponsors() {
         </div>
 
         <div className="mb-10 sm:mb-12">
+          <div className="max-w-6xl mx-auto px-4">
+
           {/* <h3 className="text-lg sm:text-xl font-bold text-center text-foreground/80 mb-6">SPONSORS PRIORITARIOS</h3> */}
-          <div className="flex justify-center grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
             {prioritySponsors.map((sponsor, index) => (
               <Card
-                key={index}
-                className="p-12 sm:p-16 items-center justify-center hover:shadow-xl transition-shadow bg-background"
+              key={index}
+              className="aspect-[16/9] p-4 sm:p-6 lg:p-8 flex items-center justify-center hover:shadow-xl transition-shadow"
               >
-                <Image
-                  src={sponsor.logo || "/placeholder.svg"}
-                  alt={sponsor.name}
-                  width={240}
-                  height={120}
-                  className="w-[250] h-[180px] object-contain "
-                />
+                <div className="relative w-full h-full">
+
+                  <Image
+                    src={sponsor.logo || "/placeholder.svg"}
+                    alt={sponsor.name}
+                    fill
+                    // width={240}
+                    // height={120}
+                    sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
+                    priority={index < 3}
+                    className="object-contain "
+                    />
+                  </div>
               </Card>
             ))}
+            </div>
           </div>
         </div>
 
-        <div>
+        <div className="max-w-screen-xl mx-auto px-4">
           {/* <h3 className="text-lg sm:text-xl font-bold text-center text-foreground/80 mb-6">SPONSORS GENERALES</h3> */}
-          <div className="grid grid-cols-5 grid-rows-3 gap-6 ">
-            {generalSponsors.map((sponsor, index) => (
-              <Card
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4 lg:gap-6">
+              {generalSponsors.map((sponsor, index) => (
+                <Card
                 key={index}
-                className="h[100px] p-6 flex items-center justify-center hover:shadow-lg transition-shadow bg-background"
-              >
-                <Image
-                  src={sponsor.logo || "/placeholder.svg"}
-                  alt={sponsor.name}
-                  width={160}
-                  height={80}
-                  className="w-full h-[120px] object-contain "
-                />
-              </Card>
-            ))}
+                className="aspect-[5/3] p-3 sm:p-4 lg:p-6 flex items-center justify-center hover:shadow-lg transition-shadow"
+                >
+                  <div className="relative w-full h-full">
+                    
+                    <Image
+                      src={sponsor.logo || "/placeholder.svg"}
+                      alt={sponsor.name}
+                      fill
+                      // width={160}
+                      // height={80}
+                      className="object-contain"
+                      sizes=" (min-width:1024px) 20vw,
+                      (min-width:768px) 25vw,
+                      (min-width:640px) 33vw,
+                      50vw"
+                      />
+                    </div>
+                </Card>
+              ))}
           </div>
         </div>
 

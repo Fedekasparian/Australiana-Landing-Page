@@ -228,8 +228,8 @@ export function RegistrarForm() {
               
             
             {/* ------------------------------------------------------------------------------------- */}
-              {/* PREVENTA 1 DISPONIBLE */}
-              PROXIMAMENTE
+              PREVENTA 1 DISPONIBLE
+              {/* PROXIMAMENTE */}
             {/* ------------------------------------------------------------------------------------- */}
             
             
@@ -247,7 +247,7 @@ export function RegistrarForm() {
               
               
             {/* ------------------------------------------------------------------------------------- */}
-              Completá el formulario con tus para acceder a la preventa y asegurar tu lugar
+              Completá el formulario con tus datos para acceder a la preventa y asegurar tu lugar
             {/* No te cuelgues y no te quedes fuera de la proxima preventa el proximo lunes 10/11*/}
             {/* ------------------------------------------------------------------------------------- */}
             
@@ -421,11 +421,11 @@ export function RegistrarForm() {
                         <div className="bg-background p-3 sm:p-4 rounded-lg">
                           <p className="text-xs text-muted-foreground mb-1">MONTO A TRANSFERIR</p>
                           <p className="font-bold text-primary text-lg sm:text-xl">
-                            ${(formData.cantidad * 7000).toLocaleString("es-AR")}
+                            ${(formData.cantidad * 8000).toLocaleString("es-AR")}
                           </p>
                           <p className="text-xs text-muted-foreground mt-1">
                             {formData.cantidad} {formData.cantidad === 1 ? "entrada" : "entradas"} ×
-                            $7.000
+                            $8.000
                           </p>
                         </div>
                       </div>
@@ -494,14 +494,16 @@ export function RegistrarForm() {
                     <Button
                       type="submit"
                       onSubmit={handleGoToPay}
-                      disabled
+                      // ----------------------------------------------------------------------------------
+                      // disabled
+                      // -----------------------------------------------------------------------------------
                       size="lg"
                       className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base sm:text-lg h-12 sm:h-14 rounded-full"
                     >
 
                       {/* ------------------------------------------------------------------------------------- */}
-                      {/* IR A PAGAR */}
-                      PROXIMA PREVENTA: HOY 19HS
+                      IR A PAGAR
+                      {/* PROXIMA PREVENTA: HOY 19HS */}
                       {/* PROXIMA PREVENTA: 10/11 */}
                       {/* PROXIMA PREVENTA: 24/11 */}
                       {/* PROXIMAMENTE */}

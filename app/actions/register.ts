@@ -90,8 +90,8 @@ export async function registrarReserva1(formData: {
         p_cantidad: formData.cantidad,
       })
 
-    console.log("✅ Resultado de la función:", data)
-    console.log("❌ Error de la función:", error)
+    //console.log("✅ Resultado de la función:", data)
+    //console.log("❌ Error de la función:", error)
 
     if (data === "RESERVADO") {
       alert("✅ Reserva confirmada, continuá con el pago.")

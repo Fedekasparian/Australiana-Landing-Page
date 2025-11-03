@@ -62,7 +62,7 @@ export function RegistrarForm() {
         setShowPaymentInfo(true)
         const reservaId = response.data;
         setIdForm(reservaId);
-        console.log("ID de la reserva creada:", reservaId)
+        //console.log("ID de la reserva creada:", reservaId)
       }
   }
 
@@ -172,13 +172,14 @@ export function RegistrarForm() {
         alert(formData.apellido)
         const filePath = `preventa1/${idForm}_${nombreLimpio}_${apeLimpio}`;
         */
-        console.log("filePath:", filePath)
+        
+        //console.log("filePath:", filePath)
         const { error: uploadError } = await supabase.storage
         .from('comprobantes')
         .upload(filePath, file)
         
         if (uploadError) {
-          alert("Error al subir el archivo. \nPor favor refresque e intente nuevamente")
+          alert("Error al subir el archivo. \nPor favor refresque la paginea e intente nuevamente")
           setComprobanteEnviado(false)
           return false;
         }
@@ -189,7 +190,7 @@ export function RegistrarForm() {
         .from('comprobantes')
         .getPublicUrl(filePath)
         
-        console.log("publicUrl:", publicUrl)
+        //console.log("publicUrl:", publicUrl)
         
         // Actualizar la reserva en la base de datos
         const {error: updateError} = await supabase
@@ -361,11 +362,13 @@ export function RegistrarForm() {
                   <p className="text-xs text-muted-foreground">Máximo 4 entradas por persona</p>
                 </div>
 
-                 {/* Sección de información de pago y carga de archivo */}
+                {/* Sección de información de pago y carga de archivo */}
                 {showPaymentInfo && (
-
+                  
                   <div className="space-y-5 sm:space-y-6 pt-4 border-t-2 border-primary/20">
                     <CountdownTimer/>
+
+                    {/* Informacion de pago */}
                     <div className="bg-primary/10 p-4 sm:p-6 rounded-lg space-y-4">
                       <div className="flex items-center gap-2 mb-3">
                         <CreditCard className="w-5 h-5 text-primary" />
@@ -375,17 +378,17 @@ export function RegistrarForm() {
                       <div className="space-y-3 text-sm sm:text-base">
                         <div className="bg-background p-3 sm:p-4 rounded-lg">
                           <p className="text-xs text-muted-foreground mb-1">ALIAS</p>
-                          <p className="font-bold text-foreground">australiana.mp</p>
-                        </div>
-
-                        <div className="bg-background p-3 sm:p-4 rounded-lg">
-                          <p className="text-xs text-muted-foreground mb-1">CBU</p>
-                          <p className="font-bold text-foreground">0000003100010234567890</p>
+                          <p className="font-bold text-foreground">mp.mercedesrugbyclub</p>
                         </div>
 
                         <div className="bg-background p-3 sm:p-4 rounded-lg">
                           <p className="text-xs text-muted-foreground mb-1">CVU</p>
-                          <p className="font-bold text-foreground">0000076500000001234567</p>
+                          <p className="font-bold text-foreground">0000003100086027427844</p>
+                        </div>
+
+                        <div className="bg-background p-3 sm:p-4 rounded-lg">
+                          <p className="text-xs text-muted-foreground mb-1">Nombre</p>
+                          <p className="font-bold text-foreground">MERCEDES RUGBY CLUB</p>
                         </div>
 
                         <div className="bg-background p-3 sm:p-4 rounded-lg">
@@ -405,6 +408,8 @@ export function RegistrarForm() {
                       </p>
                     </div>
 
+
+                    {/* Carga del comprobante */}
                     <div className="space-y-2">
                       <Label htmlFor="archivo" className="text-sm sm:text-base font-bold">
                         Comprobante de Pago *
@@ -462,7 +467,7 @@ export function RegistrarForm() {
                     <Button
                       type="submit"
                       onSubmit={handleGoToPay}
-                      disabled
+                      //disabled
                       //onClick = {handleGoToPay}
                       size="lg"
                       className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base sm:text-lg h-12 sm:h-14 rounded-full"
@@ -513,7 +518,8 @@ export function RegistrarForm() {
             </p>
           </div>
         </Card>
-                  {/* Additional info */}
+
+        {/* Additional info */}
         <div className="mt-8 sm:mt-10 lg:mt-12 text-center px-4">
           <Card className="inline-block p-4 sm:p-6 bg-muted max-w-6xl">
             <p className="text-xs sm:text-sm text-muted-foreground">

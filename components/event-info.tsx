@@ -90,7 +90,7 @@ export function EventInfo() {
                 <div>
                   <h4 className="font-bold text-sm sm:text-base mb-1">Torneos Deportivos</h4>
                   <p className="text-muted-foreground text-xs sm:text-sm">
-                    Partidos de rugby, fútbol femenino y hockey con clubes de toda la zona
+                    Partidos de rugby, fútbol femenino y hockey con clubes de todo el pais
                   </p>
                 </div>
               </div>

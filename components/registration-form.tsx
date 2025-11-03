@@ -6,12 +6,13 @@ import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Ticket, CheckCircle2, Upload, X, CreditCard } from "lucide-react"
+import { Ticket, CheckCircle2, Upload, X, CreditCard, Hourglass } from "lucide-react"
 import { registrarReserva1, registrarUsuario } from "../app/actions/register"
 import { registrarReserva } from "../app/actions/register"
 import { supabase } from "../lib/supabase"
 import { cargarPago } from "../app/actions/register"
 import CountdownTimer from "./ui/timer"
+
 
 
 export function setIdForm(id:number){
@@ -224,14 +225,32 @@ export function RegistrarForm() {
           <div className="text-center mb-8 sm:mb-10 lg:mb-12 space-y-3 sm:space-y-4">
             <div className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-3 py-1.5 sm:px-4 sm:py-2 rounded-full font-bold text-xs sm:text-sm">
               <Ticket className="w-3 h-3 sm:w-4 sm:h-4" />
-              {/* PREVENTA DISPONIBLE */}
+              
+            
+            {/* ------------------------------------------------------------------------------------- */}
+              {/* PREVENTA 1 DISPONIBLE */}
               PROXIMAMENTE
+            {/* ------------------------------------------------------------------------------------- */}
+            
+            
             </div>
             <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-foreground tracking-tight leading-tight px-4">
+              
+              
+            {/* ------------------------------------------------------------------------------------- */}
               COMPRA TU <span className="text-primary">ENTRADA</span>
+              {/* PREVENTA 1 <span className="text-primary">AGOTADA</span> */}
+            {/* ------------------------------------------------------------------------------------- */}
+            
             </h2>
             <p className="text-base sm:text-lg lg:text-xl text-muted-foreground px-4">
-              Completá el formulario para acceder a la preventa y asegurar tu lugar
+              
+              
+            {/* ------------------------------------------------------------------------------------- */}
+              Completá el formulario con tus para acceder a la preventa y asegurar tu lugar
+            {/* No te cuelgues y no te quedes fuera de la proxima preventa el proximo lunes 10/11*/}
+            {/* ------------------------------------------------------------------------------------- */}
+            
             </p>
           </div>
 
@@ -240,8 +259,6 @@ export function RegistrarForm() {
             {!submitted ? (
               <form onSubmit={showPaymentInfo ? handleSubmit : handleGoToPay} className="space-y-5 sm:space-y-6">
                 <div className="grid sm:grid-cols-2 gap-5 sm:gap-6">
-            
-                {/* <Button type="submit" onSubmit={handlePrueba}>Prueba</Button> */}
                   
                   {/* Nombre componente*/}
                   <div className="space-y-2">
@@ -280,6 +297,7 @@ export function RegistrarForm() {
                   </div>
 
                 </div>
+
                 {/* // DNI componente */}
                 <div className="space-y-2">
                   <Label htmlFor="dni" className="text-sm sm:text-base font-bold">
@@ -322,7 +340,6 @@ export function RegistrarForm() {
                     disabled={showPaymentInfo}
                   />
                 </div>
-                
                 {/* Email componente */}
                 <div className="space-y-2">
                   <Label htmlFor="mail" className="text-sm sm:text-base font-bold">
@@ -340,7 +357,6 @@ export function RegistrarForm() {
                     disabled={showPaymentInfo}
                   />
                 </div>
-
                  {/* Cantidad de entradas componente */}
                 <div className="space-y-2">
                   <Label htmlFor="cantidad" className="text-sm sm:text-base font-bold">
@@ -379,13 +395,22 @@ export function RegistrarForm() {
                         <div className="bg-background p-3 sm:p-4 rounded-lg">
                           <p className="text-xs text-muted-foreground mb-1">ALIAS</p>
                           <p className="font-bold text-foreground">
-                            //mp.mercedesrugbyclub
+                            
+                            {/* ------------------------------------------------------------------------------------- */}
+                            mp.mercedesrugbyclub
+                            {/* PONE ACA EL ALIAS NUEVO */}
+                            {/* ------------------------------------------------------------------------------------- */}
                             </p>
                         </div>
 
                         <div className="bg-background p-3 sm:p-4 rounded-lg">
                           <p className="text-xs text-muted-foreground mb-1">CVU</p>
+
+                          {/* ------------------------------------------------------------------------------------- */}
                           <p className="font-bold text-foreground">0000003100086027427844</p>
+                          {/* <p className="font-bold text-foreground">PONE ACA CVU NUEVO</p> */}
+
+                          {/* ------------------------------------------------------------------------------------- */}
                         </div>
 
                         <div className="bg-background p-3 sm:p-4 rounded-lg">
@@ -469,13 +494,20 @@ export function RegistrarForm() {
                     <Button
                       type="submit"
                       onSubmit={handleGoToPay}
-                      //disabled
-                      //onClick = {handleGoToPay}
+                      disabled
                       size="lg"
                       className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base sm:text-lg h-12 sm:h-14 rounded-full"
                     >
+
+                      {/* ------------------------------------------------------------------------------------- */}
                       {/* IR A PAGAR */}
-                      PROXIMAMENTE
+                      PROXIMA PREVENTA: HOY 19HS
+                      {/* PROXIMA PREVENTA: 10/11 */}
+                      {/* PROXIMA PREVENTA: 24/11 */}
+                      {/* PROXIMAMENTE */}
+                      {/* ------------------------------------------------------------------------------------- */}
+
+
                     </Button>
                   ) : (
                     <Button
@@ -485,7 +517,7 @@ export function RegistrarForm() {
                       disabled = {!file || file.size > 5 * 1024 * 1024 || comprpobanteEnviado}
                       
                     >
-                      CONFIRMAR REGISTRO
+                      CONFIRMAR COMPRA
                     </Button>
                   )}
                 </div>
@@ -508,10 +540,7 @@ export function RegistrarForm() {
             )}
           </div>
 
-
-
-
-          {/* Additional info */}
+          {/* Informacion importante */}
           <div className="mt-6 sm:mt-8 text-center px-4">
             
             <p className="text-xs sm:text-sm text-muted-foreground">
@@ -521,13 +550,23 @@ export function RegistrarForm() {
           </div>
         </Card>
 
-        {/* Additional info */}
+        {/* Problemas con el registro */}
         <div className="mt-8 sm:mt-10 lg:mt-12 text-center px-4">
           <Card className="inline-block p-4 sm:p-6 bg-muted max-w-6xl">
             <p className="text-xs sm:text-sm text-muted-foreground">
               ¿Problemas con el registro? Escribinos a{" "}
               <a href="mailto:info@australiana.com" className="text-primary font-bold hover:underline">
                 info@australiana.com
+              </a>
+              {" "}o{" "}
+              <a
+                href="https://www.instagram.com/fiestaaustraliana?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary font-bold hover:underline"
+                aria-label="Instagram"
+              >
+                @fiestaaustraliana
               </a>
             </p>
           </Card>

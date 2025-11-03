@@ -398,7 +398,7 @@ export function RegistrarForm() {
                             
                             {/* ------------------------------------------------------------------------------------- */}
                             mp.mercedesrugbyclub
-                            {/* PONE ACA EL ALIAS NUEVO */}
+                            {/* mercedesrc.bru */}
                             {/* ------------------------------------------------------------------------------------- */}
                             </p>
                         </div>
@@ -415,7 +415,12 @@ export function RegistrarForm() {
 
                         <div className="bg-background p-3 sm:p-4 rounded-lg">
                           <p className="text-xs text-muted-foreground mb-1">Nombre</p>
+
+
+                          {/* ------------------------------------------------------------------------------------- */}
                           <p className="font-bold text-foreground">MERCEDES RUGBY CLUB</p>
+                          {/* <p className="font-bold text-foreground">Santiago Martino</p> */}
+                          {/* ------------------------------------------------------------------------------------- */}
                         </div>
 
                         <div className="bg-background p-3 sm:p-4 rounded-lg">
@@ -495,7 +500,7 @@ export function RegistrarForm() {
                       type="submit"
                       onSubmit={handleGoToPay}
                       // ----------------------------------------------------------------------------------
-                       disabled
+                      //disabled
                       // -----------------------------------------------------------------------------------
                       size="lg"
                       className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base sm:text-lg h-12 sm:h-14 rounded-full"
@@ -503,7 +508,6 @@ export function RegistrarForm() {
 
                       {/* ------------------------------------------------------------------------------------- */}
                       IR A PAGAR
-                      {/* PROXIMA PREVENTA: HOY 19HS */}
                       {/* PROXIMA PREVENTA: 10/11 */}
                       {/* PROXIMA PREVENTA: 24/11 */}
                       {/* PROXIMAMENTE */}

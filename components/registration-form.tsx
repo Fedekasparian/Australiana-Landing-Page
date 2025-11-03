@@ -228,8 +228,8 @@ export function RegistrarForm() {
               
             
             {/* ------------------------------------------------------------------------------------- */}
-              PREVENTA 1 DISPONIBLE
-              {/* PROXIMAMENTE */}
+              {/* PREVENTA 1 DISPONIBLE */}
+              PROXIMAMENTE PREVENTA #2
             {/* ------------------------------------------------------------------------------------- */}
             
             
@@ -238,8 +238,8 @@ export function RegistrarForm() {
               
               
             {/* ------------------------------------------------------------------------------------- */}
-              COMPRA TU <span className="text-primary">ENTRADA</span>
-              {/* PREVENTA 1 <span className="text-primary">AGOTADA</span> */}
+              {/* COMPRA TU <span className="text-primary">ENTRADA</span> */}
+              PREVENTA 1 <span className="text-primary">AGOTADA</span>
             {/* ------------------------------------------------------------------------------------- */}
             
             </h2>
@@ -247,8 +247,8 @@ export function RegistrarForm() {
               
               
             {/* ------------------------------------------------------------------------------------- */}
-              Completá el formulario con tus datos para acceder a la preventa y asegurar tu lugar
-            {/* No te cuelgues y no te quedes fuera de la proxima preventa el proximo lunes 10/11*/}
+              {/* Completá el formulario con tus datos para acceder a la preventa y asegurar tu lugar */}
+            No te cuelgues y no te quedes fuera de la proxima preventa el proximo lunes 10/11
             {/* ------------------------------------------------------------------------------------- */}
             
             </p>
@@ -500,7 +500,7 @@ export function RegistrarForm() {
                       type="submit"
                       onSubmit={handleGoToPay}
                       // ----------------------------------------------------------------------------------
-                      //disabled
+                      disabled
                       // -----------------------------------------------------------------------------------
                       size="lg"
                       className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base sm:text-lg h-12 sm:h-14 rounded-full"

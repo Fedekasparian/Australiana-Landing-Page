@@ -378,7 +378,9 @@ export function RegistrarForm() {
                       <div className="space-y-3 text-sm sm:text-base">
                         <div className="bg-background p-3 sm:p-4 rounded-lg">
                           <p className="text-xs text-muted-foreground mb-1">ALIAS</p>
-                          <p className="font-bold text-foreground">mp.mercedesrugbyclub</p>
+                          <p className="font-bold text-foreground">
+                            //mp.mercedesrugbyclub
+                            </p>
                         </div>
 
                         <div className="bg-background p-3 sm:p-4 rounded-lg">

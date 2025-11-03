@@ -495,7 +495,7 @@ export function RegistrarForm() {
                       type="submit"
                       onSubmit={handleGoToPay}
                       // ----------------------------------------------------------------------------------
-                      // disabled
+                       disabled
                       // -----------------------------------------------------------------------------------
                       size="lg"
                       className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base sm:text-lg h-12 sm:h-14 rounded-full"

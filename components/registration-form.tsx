@@ -301,7 +301,7 @@ export function RegistrarForm() {
                       }
                     onInput={(e) => e.currentTarget.setCustomValidity("")} // limpia el msg al tipear
                     className="h-11 sm:h-12 text-sm sm:text-base"
-                    placeholder="Ingrese su DNI sin puntos ni guiones"
+                    placeholder="Ingresá tu DNI sin puntos ni guiones"
                     disabled={showPaymentInfo}
                   />
                 </div>

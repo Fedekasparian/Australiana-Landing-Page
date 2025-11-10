@@ -531,8 +531,8 @@ export function RegistrarForm() {
                       onSubmit={handleGoToPay}
                       // ----------------------------------------------------------------------------------
                       
-                      disabled={prevAgotada}
-                      //disabled
+                      //disabled={prevAgotada}
+                      disabled
                       
                       // -----------------------------------------------------------------------------------
                       size="lg"
@@ -541,7 +541,7 @@ export function RegistrarForm() {
 
                       {/* ------------------------------------------------------------------------------------- */}
                       {/* IR A PAGAR */}
-                      {prevAgotada? <span>PROXIMA PREVENTA: 24/11</span>: <span> IR A PAGAR </span>}
+                      {prevAgotada? <span>PROXIMA PREVENTA: 24/11</span>: <span> AGOTADA </span>}
                       {/* PROXIMA PREVENTA: 24/11 */}
                       {/* PROXIMAMENTE */}
                       {/* ------------------------------------------------------------------------------------- */}

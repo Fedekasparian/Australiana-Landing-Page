@@ -222,8 +222,8 @@ export function RegistrarForm() {
               
             
             {/* ------------------------------------------------------------------------------------- */}
-              {/* PREVENTA 2 DISPONIBLE */}
-              PROXIMAMENTE PREVENTA #2
+              PREVENTA 2 DISPONIBLE
+              {/* PROXIMAMENTE PREVENTA #2 */}
             {/* ------------------------------------------------------------------------------------- */}
             
             
@@ -232,8 +232,10 @@ export function RegistrarForm() {
               
               
             {/* ------------------------------------------------------------------------------------- */}
-              {/* COMPRA TU <span className="text-primary">ENTRADA</span> */}
-              PREVENTA 1 <span className="text-primary">AGOTADA</span>
+            
+              COMPRA TU <span className="text-primary">ENTRADA</span>
+              {/* PREVENTA 1 <span className="text-primary">AGOTADA</span> */}
+            
             {/* ------------------------------------------------------------------------------------- */}
             
             </h2>
@@ -241,8 +243,10 @@ export function RegistrarForm() {
               
               
             {/* ------------------------------------------------------------------------------------- */}
-              {/* Completá el formulario con tus datos para acceder a la preventa y asegurar tu lugar */}
-            No te cuelgues y no te quedes fuera de la preventa #2 el proximo lunes 10/11
+            
+            Completá el formulario con tus datos para acceder a la preventa y asegurar tu lugar
+            {/* No te cuelgues y no te quedes fuera de la preventa #2 el proximo lunes 10/11 */}
+            
             {/* ------------------------------------------------------------------------------------- */}
             
             </p>
@@ -391,8 +395,11 @@ export function RegistrarForm() {
                           <p className="font-bold text-foreground">
                             
                             {/* ------------------------------------------------------------------------------------- */}
-                            mp.mercedesrugbyclub
+                            
+                            australiana2.mp
+                            {/* mp.mercedesrugbyclub */}
                             {/* mercedesrc.bru */}
+                            
                             {/* ------------------------------------------------------------------------------------- */}
                             </p>
                         </div>
@@ -401,6 +408,7 @@ export function RegistrarForm() {
                           <p className="text-xs text-muted-foreground mb-1">CVU</p>
 
                           {/* ------------------------------------------------------------------------------------- */}
+                          
                           <p className="font-bold text-foreground">0000003100086027427844</p>
                           {/* <p className="font-bold text-foreground">PONE ACA CVU NUEVO</p> */}
 
@@ -412,8 +420,10 @@ export function RegistrarForm() {
 
 
                           {/* ------------------------------------------------------------------------------------- */}
+                          
                           <p className="font-bold text-foreground">MERCEDES RUGBY CLUB</p>
                           {/* <p className="font-bold text-foreground">Santiago Martino</p> */}
+                          
                           {/* ------------------------------------------------------------------------------------- */}
                         </div>
 
@@ -520,8 +530,10 @@ export function RegistrarForm() {
                       type="submit"
                       onSubmit={handleGoToPay}
                       // ----------------------------------------------------------------------------------
+                      
                       //disabled={prevAgotada}
                       disabled
+                      
                       // -----------------------------------------------------------------------------------
                       size="lg"
                       className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base sm:text-lg h-12 sm:h-14 rounded-full"
@@ -529,7 +541,7 @@ export function RegistrarForm() {
 
                       {/* ------------------------------------------------------------------------------------- */}
                       {/* IR A PAGAR */}
-                      {prevAgotada? <span>PROXIMA PREVENTA: 24/11</span>: <span> HOY 19HS </span>}
+                      {prevAgotada? <span>PROXIMA PREVENTA: 24/11</span>: <span> IR A PAGAR </span>}
                       {/* PROXIMA PREVENTA: 24/11 */}
                       {/* PROXIMAMENTE */}
                       {/* ------------------------------------------------------------------------------------- */}
@@ -584,7 +596,7 @@ export function RegistrarForm() {
             <p className="text-xs sm:text-sm text-muted-foreground">
               ¿Problemas con el registro? Escribinos a{" "}
               <a href="mailto:info@australiana.com" className="text-primary font-bold hover:underline">
-                info@australiana.com
+                infoaustraliana@gmail.com
               </a>
               {" "}o{" "}
               <a

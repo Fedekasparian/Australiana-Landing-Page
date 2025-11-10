@@ -7,10 +7,8 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Ticket, CheckCircle2, Upload, X, CreditCard, Hourglass } from "lucide-react"
-import { registrarReserva1, registrarUsuario } from "../app/actions/register"
 import { registrarReserva } from "../app/actions/register"
 import { supabase } from "../lib/supabase"
-import { cargarPago } from "../app/actions/register"
 import CountdownTimer from "./ui/timer"
 
 
@@ -36,6 +34,10 @@ export function RegistrarForm() {
   const [idForm, setIdForm] = useState<number | null>(null)
   const [timer, setTimer] = useState<NodeJS.Timeout | null>(null)
   const [comprpobanteEnviado, setComprobanteEnviado] = useState(false)
+  const [prevAgotada, setPrevAgotada] = useState(false)
+  const [entradasRestantesbool, setEntradasRestantesBool] = useState(false)
+  const [entradasRestantes, setEntradasRestantes] = useState("")
+
 
 
 
@@ -58,12 +60,20 @@ export function RegistrarForm() {
 
       // Si response es exitoso, muestra la seccion de pago, sino muestra mensjae de error
       if (response.error){
-        alert("Error al registrar la reserva: " + response.error)
+        if (response.error === "¡Preventa agotada!"){
+          setPrevAgotada(true)
+        }
+        else {
+          setEntradasRestantesBool(true)
+          setEntradasRestantes(response.error)
+        }
+        // alert("Error al registrar la reserva: " + response.error)
       }else {
+        setEntradasRestantesBool(false)
+        setPrevAgotada(false)
         setShowPaymentInfo(true)
         const reservaId = response.data;
         setIdForm(reservaId);
-        //console.log("ID de la reserva creada:", reservaId)
       }
   }
 
@@ -72,23 +82,10 @@ export function RegistrarForm() {
     
     e.preventDefault()
     setComprobanteEnviado(true)
-    // const response = await cargarPago({
-      //   idForm: idForm!,
-      //   urlArchivo: formData.archivo,
-      //   })
-      //Llamo a funcion en app/actions/register.ts para insertar en la bae de datoss
-      
+
     try{
       //Reset del formulario
-      handleConfirmacionPago();
-
-        /*setTimeout(() => {
-          setSubmitted(false)
-          setFormData({ nombre: "", apellido: "", telefono: "", mail: "", cantidad: 1, archivo: ""   })
-          setFile(null)
-          setShowPaymentInfo(false)
-        }, 5000)*/
-    
+      handleConfirmacionPago();    
 
     }catch (error:any) {
       alert("Error al registrar el usuario: " + error.message + ". \n Refresque la pagina e intente nuevamente.")
@@ -98,9 +95,6 @@ export function RegistrarForm() {
 
   // Manejador de cambios de los inputs
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-
-
-
     const value =e.target.value
     e.target.type === "number" ? Number.parseInt(e.target.value) : e.target.value
     setFormData((prev) => ({
@@ -160,7 +154,7 @@ export function RegistrarForm() {
         const nombre = formData.nombre;
         const apellido = formData.apellido;
         const dni = formData.dni;
-        const filePath = buildFilePath('preventa1', nombre, apellido, dni);
+        const filePath = buildFilePath('preventa2', nombre, apellido, dni);
 
         /*const removeAccents = (s: string) => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '');  //Saca acentos del texto
         const cleanText = (s: string) =>(s ?? '').trim().replace(/\s{2,}/g, ' '); //Saca espacios repetidos
@@ -180,7 +174,7 @@ export function RegistrarForm() {
         .upload(filePath, file)
         
         if (uploadError) {
-          alert("Error al subir el archivo. \nPor favor refresque la paginea e intente nuevamente")
+          alert("Error al subir el archivo. \nPor favor refresque la pagina e intente nuevamente")
           setComprobanteEnviado(false)
           return false;
         }
@@ -228,7 +222,7 @@ export function RegistrarForm() {
               
             
             {/* ------------------------------------------------------------------------------------- */}
-              {/* PREVENTA 1 DISPONIBLE */}
+              {/* PREVENTA 2 DISPONIBLE */}
               PROXIMAMENTE PREVENTA #2
             {/* ------------------------------------------------------------------------------------- */}
             
@@ -248,7 +242,7 @@ export function RegistrarForm() {
               
             {/* ------------------------------------------------------------------------------------- */}
               {/* Completá el formulario con tus datos para acceder a la preventa y asegurar tu lugar */}
-            No te cuelgues y no te quedes fuera de la proxima preventa el proximo lunes 10/11
+            No te cuelgues y no te quedes fuera de la preventa #2 el proximo lunes 10/11
             {/* ------------------------------------------------------------------------------------- */}
             
             </p>
@@ -366,7 +360,7 @@ export function RegistrarForm() {
                     id="cantidad"
                     name="cantidad"
                     type="number"
-                    min="0"
+                    min="1"
                     max="4"
                     required
                     value={formData.cantidad}
@@ -426,11 +420,11 @@ export function RegistrarForm() {
                         <div className="bg-background p-3 sm:p-4 rounded-lg">
                           <p className="text-xs text-muted-foreground mb-1">MONTO A TRANSFERIR</p>
                           <p className="font-bold text-primary text-lg sm:text-xl">
-                            ${(formData.cantidad * 8000).toLocaleString("es-AR")}
+                            ${(formData.cantidad * 10000).toLocaleString("es-AR")}
                           </p>
                           <p className="text-xs text-muted-foreground mt-1">
                             {formData.cantidad} {formData.cantidad === 1 ? "entrada" : "entradas"} ×
-                            $8.000
+                            $10.000
                           </p>
                         </div>
                       </div>
@@ -493,6 +487,32 @@ export function RegistrarForm() {
                   </div>
                 )}
 
+                {/* Mostrar preventa agotada  */}
+                {prevAgotada? 
+                <span 
+                  aria-live="polite"
+                  className="inline-flex items-center gap-2 rounded-full px-8 py-3 text-xs sm:text-sm font-extrabold tracking-wide uppercase
+                            text-white shadow-lg ring-1 ring-white/30
+                            bg-gradient-to-r from-fuchsia-600 via-pink-600 to-violet-600">
+                    <svg width="14" height="14" viewBox="0 0 24 24" className="opacity-90">
+                      <path fill="currentColor" d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5Zm3 8H9V7a3 3 0 1 1 6 0v3Z"/>
+                    </svg>
+                    Preventa agotada
+                  </span> : <span>  </span>}
+                
+                {/* Mostrar entradas restantes */}
+                {entradasRestantesbool? 
+                <span 
+                  aria-live="polite"
+                  className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs sm:text-sm font-extrabold tracking-wide uppercase
+                            text-white shadow-lg ring-1 ring-white/30
+                            bg-gradient-to-r from-fuchsia-600 via-pink-600 to-violet-600">
+                    <svg width="14" height="14" viewBox="0 0 24 24" className="opacity-90">
+                      <path fill="currentColor" d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5Zm3 8H9V7a3 3 0 1 1 6 0v3Z"/>
+                    </svg>
+                    {entradasRestantes}
+                </span> : <span>  </span>}
+
                  {/* Boton ir a pagar */}
                 <div className="pt-2 sm:pt-4">
                   {!showPaymentInfo ? (
@@ -500,6 +520,7 @@ export function RegistrarForm() {
                       type="submit"
                       onSubmit={handleGoToPay}
                       // ----------------------------------------------------------------------------------
+                      //disabled={prevAgotada}
                       disabled
                       // -----------------------------------------------------------------------------------
                       size="lg"
@@ -508,7 +529,7 @@ export function RegistrarForm() {
 
                       {/* ------------------------------------------------------------------------------------- */}
                       {/* IR A PAGAR */}
-                      PROXIMA PREVENTA: 10/11
+                      {prevAgotada? <span>PROXIMA PREVENTA: 24/11</span>: <span> HOY 19HS </span>}
                       {/* PROXIMA PREVENTA: 24/11 */}
                       {/* PROXIMAMENTE */}
                       {/* ------------------------------------------------------------------------------------- */}
@@ -531,6 +552,7 @@ export function RegistrarForm() {
                 <p className="text-xs sm:text-sm text-muted-foreground text-center">
                   Luego de verificar el pago te llegará un mail con la confirmación del mismo.
                 </p>
+                
 
               </form>
             ) : (

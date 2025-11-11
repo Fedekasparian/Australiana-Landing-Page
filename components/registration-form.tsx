@@ -34,6 +34,7 @@ export function RegistrarForm() {
   const [idForm, setIdForm] = useState<number | null>(null)
   const [timer, setTimer] = useState<NodeJS.Timeout | null>(null)
   const [comprpobanteEnviado, setComprobanteEnviado] = useState(false)
+  const [pagarBtn, setPagarBtn] = useState(false)
   const [prevAgotada, setPrevAgotada] = useState(false)
   const [entradasRestantesbool, setEntradasRestantesBool] = useState(false)
   const [entradasRestantes, setEntradasRestantes] = useState("")
@@ -44,6 +45,8 @@ export function RegistrarForm() {
   // Llama la funcion para insertar la reserva y ademas si es exitoso habilita la seccion de pago
   const handleGoToPay = async (e: React.FormEvent) => {
     e.preventDefault()
+
+    setPagarBtn(true)
 
       const response = await registrarReserva({
       nombre: formData.nombre,
@@ -69,6 +72,7 @@ export function RegistrarForm() {
         }
         // alert("Error al registrar la reserva: " + response.error)
       }else {
+        setPagarBtn(false)
         setEntradasRestantesBool(false)
         setPrevAgotada(false)
         setShowPaymentInfo(true)
@@ -222,8 +226,8 @@ export function RegistrarForm() {
               
             
             {/* ------------------------------------------------------------------------------------- */}
-              PREVENTA 2 DISPONIBLE
-              {/* PROXIMAMENTE PREVENTA #2 */}
+              {/* PREVENTA 2 DISPONIBLE */}
+              PROXIMAMENTE PREVENTA #3
             {/* ------------------------------------------------------------------------------------- */}
             
             
@@ -233,8 +237,8 @@ export function RegistrarForm() {
               
             {/* ------------------------------------------------------------------------------------- */}
             
-              COMPRA TU <span className="text-primary">ENTRADA</span>
-              {/* PREVENTA 1 <span className="text-primary">AGOTADA</span> */}
+              {/* COMPRA TU <span className="text-primary">ENTRADA</span> */}
+              PREVENTA 2 <span className="text-primary">AGOTADA</span>
             
             {/* ------------------------------------------------------------------------------------- */}
             
@@ -244,8 +248,8 @@ export function RegistrarForm() {
               
             {/* ------------------------------------------------------------------------------------- */}
             
-            Completá el formulario con tus datos para acceder a la preventa y asegurar tu lugar
-            {/* No te cuelgues y no te quedes fuera de la preventa #2 el proximo lunes 10/11 */}
+            {/* Completá el formulario con tus datos para acceder a la preventa y asegurar tu lugar */}
+            No te cuelgues y no te quedes fuera de la preventa #3 el dia lunes 24/11
             
             {/* ------------------------------------------------------------------------------------- */}
             
@@ -531,8 +535,8 @@ export function RegistrarForm() {
                       onSubmit={handleGoToPay}
                       // ----------------------------------------------------------------------------------
                       
-                      //disabled={prevAgotada}
                       disabled
+                      //disabled={prevAgotada || pagarBtn}
                       
                       // -----------------------------------------------------------------------------------
                       size="lg"
@@ -541,7 +545,7 @@ export function RegistrarForm() {
 
                       {/* ------------------------------------------------------------------------------------- */}
                       {/* IR A PAGAR */}
-                      {prevAgotada? <span>PROXIMA PREVENTA: 24/11</span>: <span> AGOTADA </span>}
+                      {prevAgotada? <span>NOS VEMOS EN LA FIESTA!</span>: <span> IR A PAGAR </span>}
                       {/* PROXIMA PREVENTA: 24/11 */}
                       {/* PROXIMAMENTE */}
                       {/* ------------------------------------------------------------------------------------- */}

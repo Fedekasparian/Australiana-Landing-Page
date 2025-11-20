@@ -24,6 +24,7 @@ export function RegistrarForm() {
     dni: "",
     telefono: "",
     mail: "",
+    confirmEmail: "",
     cantidad: 1,
     archivo: "",
   })
@@ -38,14 +39,20 @@ export function RegistrarForm() {
   const [prevAgotada, setPrevAgotada] = useState(false)
   const [entradasRestantesbool, setEntradasRestantesBool] = useState(false)
   const [entradasRestantes, setEntradasRestantes] = useState("")
+  const [emailError, setEmailError] = useState("")
 
 
 
 
   // Llama la funcion para insertar la reserva y ademas si es exitoso habilita la seccion de pago
   const handleGoToPay = async (e: React.FormEvent) => {
+    
     e.preventDefault()
-
+    
+    if (formData.mail !== formData.confirmEmail) {
+      setEmailError("Los emails no coinciden")
+      return
+    }
     setPagarBtn(true)
 
       const response = await registrarReserva({
@@ -105,6 +112,9 @@ export function RegistrarForm() {
       ...prev,
       [e.target.name]: value,
     }))
+    if (e.target.name === "email" || e.target.name === "confirmEmail") {
+      setEmailError("")
+      }
     }
 
   // Manejador de archivo
@@ -226,8 +236,8 @@ export function RegistrarForm() {
               
             
             {/* ------------------------------------------------------------------------------------- */}
-              {/* PREVENTA 2 DISPONIBLE */}
-              PROXIMAMENTE PREVENTA #3
+              PREVENTA IMPERIAL DISPONIBLE
+              {/* PROXIMAMENTE PREVENTA #3 */}
             {/* ------------------------------------------------------------------------------------- */}
             
             
@@ -237,8 +247,8 @@ export function RegistrarForm() {
               
             {/* ------------------------------------------------------------------------------------- */}
             
-              {/* COMPRA TU <span className="text-primary">ENTRADA</span> */}
-              PREVENTA 2 <span className="text-primary">AGOTADA</span>
+              COMPRA TU <span className="text-primary">ENTRADA</span>
+              {/* PREVENTA 2 <span className="text-primary">AGOTADA</span> */}
             
             {/* ------------------------------------------------------------------------------------- */}
             
@@ -249,7 +259,9 @@ export function RegistrarForm() {
             {/* ------------------------------------------------------------------------------------- */}
             
             {/* Completá el formulario con tus datos para acceder a la preventa y asegurar tu lugar */}
-            No te cuelgues y no te quedes fuera de la preventa #3 el dia lunes 24/11
+            {/* Comprando una entrada vas a tener una cerveza <strong className="text-primary">imperial gratis</strong> para consumir por la tarde! */}
+            Tu entrada incluye una <strong >IMPERIAL</strong> para disfrutar de tu tarde en el Seven del Oeste - <strong>Retirala antes de las 21hs en el Refugio Aussie</strong> - Entrada al público del Seven del Oeste libre y gratuita.
+            {/* No te cuelgues y no te quedes fuera de la preventa #3 el dia lunes 24/11 */}
             
             {/* ------------------------------------------------------------------------------------- */}
             
@@ -359,6 +371,24 @@ export function RegistrarForm() {
                     disabled={showPaymentInfo}
                   />
                 </div>
+                {/* Email confirmacion*/}
+                <div className="space-y-2">
+                  <Label htmlFor="confirmEmail" className="text-sm sm:text-base font-bold">
+                    Confirmar Email *
+                  </Label>
+                  <Input
+                    id="confirmEmail"
+                    name="confirmEmail"
+                    type="email"
+                    required
+                    value={formData.confirmEmail}
+                    onChange={handleChange}
+                    className={`h-11 sm:h-12 text-sm sm:text-base ${emailError ? "border-red-500 border-2" : ""}`}
+                    placeholder="Repetí tu email"
+                    disabled={showPaymentInfo}
+                  />
+                  {emailError && <p className="text-sm text-red-500 font-medium">{emailError}</p>}
+                </div>
                  {/* Cantidad de entradas componente */}
                 <div className="space-y-2">
                   <Label htmlFor="cantidad" className="text-sm sm:text-base font-bold">
@@ -369,15 +399,15 @@ export function RegistrarForm() {
                     name="cantidad"
                     type="number"
                     min="1"
-                    max="4"
+                    max="2"
                     required
                     value={formData.cantidad}
                     onChange={handleChange}
                     className="h-11 sm:h-12 text-sm sm:text-base"
-                    placeholder="1, 2, 3 o 4"
+                    placeholder="1 o 2"
                     disabled={showPaymentInfo}
                   />
-                  <p className="text-xs text-muted-foreground">Máximo 4 entradas por persona</p>
+                  <p className="text-xs text-muted-foreground">Máximo 2 entradas por persona</p>
                 </div>
 
                 {/* Sección de información de pago y carga de archivo */}
@@ -400,7 +430,7 @@ export function RegistrarForm() {
                             
                             {/* ------------------------------------------------------------------------------------- */}
                             
-                            australiana2.mp
+                            australiana3.mp
                             {/* mp.mercedesrugbyclub */}
                             {/* mercedesrc.bru */}
                             
@@ -434,11 +464,11 @@ export function RegistrarForm() {
                         <div className="bg-background p-3 sm:p-4 rounded-lg">
                           <p className="text-xs text-muted-foreground mb-1">MONTO A TRANSFERIR</p>
                           <p className="font-bold text-primary text-lg sm:text-xl">
-                            ${(formData.cantidad * 10000).toLocaleString("es-AR")}
+                            ${(formData.cantidad * 15000).toLocaleString("es-AR")}
                           </p>
                           <p className="text-xs text-muted-foreground mt-1">
                             {formData.cantidad} {formData.cantidad === 1 ? "entrada" : "entradas"} ×
-                            $10.000
+                            $15.000
                           </p>
                         </div>
                       </div>
@@ -546,6 +576,7 @@ export function RegistrarForm() {
                       {/* ------------------------------------------------------------------------------------- */}
                       {/* IR A PAGAR */}
                       {prevAgotada? <span>NOS VEMOS EN LA FIESTA!</span>: <span> IR A PAGAR </span>}
+                      {}
                       {/* PROXIMA PREVENTA: 24/11 */}
                       {/* PROXIMAMENTE */}
                       {/* ------------------------------------------------------------------------------------- */}

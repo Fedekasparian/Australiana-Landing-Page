@@ -575,7 +575,7 @@ export function RegistrarForm() {
 
                       {/* ------------------------------------------------------------------------------------- */}
                       {/* IR A PAGAR */}
-                      {prevAgotada? <span>NOS VEMOS EN LA FIESTA!</span>: <span> IR A PAGAR </span>}
+                      {prevAgotada? <span>NOS VEMOS EN LA FIESTA!</span>: <span> AGOTADO </span>}
                       {}
                       {/* PROXIMA PREVENTA: 24/11 */}
                       {/* PROXIMAMENTE */}

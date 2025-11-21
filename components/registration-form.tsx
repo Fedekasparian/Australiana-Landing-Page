@@ -565,8 +565,8 @@ export function RegistrarForm() {
                       onSubmit={handleGoToPay}
                       // ----------------------------------------------------------------------------------
                       
-                      //disabled
-                      disabled={prevAgotada || pagarBtn}
+                      disabled
+                      //disabled={prevAgotada || pagarBtn}
                       
                       // -----------------------------------------------------------------------------------
                       size="lg"

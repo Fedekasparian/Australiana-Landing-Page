@@ -236,7 +236,7 @@ export function RegistrarForm() {
               
             
             {/* ------------------------------------------------------------------------------------- */}
-              PREVENTA IMPERIAL DISPONIBLE
+              PREVENTA 3 DISPONIBLE
               {/* PROXIMAMENTE PREVENTA #3 */}
             {/* ------------------------------------------------------------------------------------- */}
             
@@ -248,7 +248,7 @@ export function RegistrarForm() {
             {/* ------------------------------------------------------------------------------------- */}
             
               COMPRA TU <span className="text-primary">ENTRADA</span>
-              {/* PREVENTA 2 <span className="text-primary">AGOTADA</span> */}
+              {/* PREVENTA 3 <span className="text-primary">AGOTADA</span> */}
             
             {/* ------------------------------------------------------------------------------------- */}
             
@@ -258,9 +258,9 @@ export function RegistrarForm() {
               
             {/* ------------------------------------------------------------------------------------- */}
             
-            {/* Completá el formulario con tus datos para acceder a la preventa y asegurar tu lugar */}
+            Completá el formulario con tus datos para acceder a la preventa y asegurar tu lugar
             {/* Comprando una entrada vas a tener una cerveza <strong className="text-primary">imperial gratis</strong> para consumir por la tarde! */}
-            Tu entrada incluye una <strong >IMPERIAL</strong> para disfrutar de tu tarde en el Seven del Oeste - <strong>Retirala antes de las 21hs en el Refugio Aussie</strong> - Entrada al público del Seven del Oeste libre y gratuita.
+            {/* Tu entrada incluye una <strong >IMPERIAL</strong> para disfrutar de tu tarde en el Seven del Oeste - <strong>Retirala antes de las 21hs en el Refugio Aussie</strong> - Entrada al público del Seven del Oeste libre y gratuita. */}
             {/* No te cuelgues y no te quedes fuera de la preventa #3 el dia lunes 24/11 */}
             
             {/* ------------------------------------------------------------------------------------- */}
@@ -399,15 +399,15 @@ export function RegistrarForm() {
                     name="cantidad"
                     type="number"
                     min="1"
-                    max="2"
+                    max="4"
                     required
                     value={formData.cantidad}
                     onChange={handleChange}
                     className="h-11 sm:h-12 text-sm sm:text-base"
-                    placeholder="1 o 2"
+                    placeholder="1, 2, 3 o 4"
                     disabled={showPaymentInfo}
                   />
-                  <p className="text-xs text-muted-foreground">Máximo 2 entradas por persona</p>
+                  <p className="text-xs text-muted-foreground">Máximo 4 entradas por persona</p>
                 </div>
 
                 {/* Sección de información de pago y carga de archivo */}
@@ -565,8 +565,8 @@ export function RegistrarForm() {
                       onSubmit={handleGoToPay}
                       // ----------------------------------------------------------------------------------
                       
-                      disabled
-                      //disabled={prevAgotada || pagarBtn}
+                      // disabled
+                      disabled={prevAgotada || pagarBtn}
                       
                       // -----------------------------------------------------------------------------------
                       size="lg"
@@ -574,11 +574,10 @@ export function RegistrarForm() {
                     >
 
                       {/* ------------------------------------------------------------------------------------- */}
-                      {/* IR A PAGAR */}
-                      {prevAgotada? <span>NOS VEMOS EN LA FIESTA!</span>: <span> AGOTADO </span>}
-                      {}
-                      {/* PROXIMA PREVENTA: 24/11 */}
-                      {/* PROXIMAMENTE */}
+                      
+                      {/* {prevAgotada? <span>NOS VEMOS EN LA FIESTA!</span>: <span> AGOTADO </span>} */}
+                      {prevAgotada? <span>NOS VEMOS EN LA FIESTA!</span>: <span> IR A PAGAR </span>}
+                      
                       {/* ------------------------------------------------------------------------------------- */}
 
 
@@ -609,7 +608,7 @@ export function RegistrarForm() {
                 </div>
                 <h3 className="text-xl sm:text-2xl font-bold text-foreground">¡Registro Exitoso!</h3>
                 <p className="text-sm sm:text-base text-muted-foreground px-4">
-                  Recibimos tu comprobante. Te enviaremos un email luego de la confirmación del mismo.
+                  Recibimos tu comprobante. En el transcurso de mañana te enviaremos un email con la confirmación del mismo.
                 </p>
               </div>
             )}

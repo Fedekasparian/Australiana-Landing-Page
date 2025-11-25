@@ -236,7 +236,7 @@ export function RegistrarForm() {
               
             
             {/* ------------------------------------------------------------------------------------- */}
-              PREVENTA 3 DISPONIBLE
+              PREVENTA #3
               {/* PROXIMAMENTE PREVENTA #3 */}
             {/* ------------------------------------------------------------------------------------- */}
             
@@ -247,8 +247,8 @@ export function RegistrarForm() {
               
             {/* ------------------------------------------------------------------------------------- */}
             
-              COMPRA TU <span className="text-primary">ENTRADA</span>
-              {/* PREVENTA 3 <span className="text-primary">AGOTADA</span> */}
+              {/* COMPRA TU <span className="text-primary">ENTRADA</span> */}
+              PREVENTA 3 <span className="text-primary">AGOTADA</span>
             
             {/* ------------------------------------------------------------------------------------- */}
             
@@ -257,8 +257,8 @@ export function RegistrarForm() {
               
               
             {/* ------------------------------------------------------------------------------------- */}
-            
-            Completá el formulario con tus datos para acceder a la preventa y asegurar tu lugar
+            Preventa agotada! Nos vemos el sábado en La Fiesta Australiana!
+            {/* Completá el formulario con tus datos para acceder a la preventa y asegurar tu lugar */}
             {/* Comprando una entrada vas a tener una cerveza <strong className="text-primary">imperial gratis</strong> para consumir por la tarde! */}
             {/* Tu entrada incluye una <strong >IMPERIAL</strong> para disfrutar de tu tarde en el Seven del Oeste - <strong>Retirala antes de las 21hs en el Refugio Aussie</strong> - Entrada al público del Seven del Oeste libre y gratuita. */}
             {/* No te cuelgues y no te quedes fuera de la preventa #3 el dia lunes 24/11 */}
@@ -565,8 +565,8 @@ export function RegistrarForm() {
                       onSubmit={handleGoToPay}
                       // ----------------------------------------------------------------------------------
                       
-                      // disabled
-                      disabled={prevAgotada || pagarBtn}
+                      disabled
+                      //disabled={prevAgotada || pagarBtn}
                       
                       // -----------------------------------------------------------------------------------
                       size="lg"
@@ -576,7 +576,7 @@ export function RegistrarForm() {
                       {/* ------------------------------------------------------------------------------------- */}
                       
                       {/* {prevAgotada? <span>NOS VEMOS EN LA FIESTA!</span>: <span> AGOTADO </span>} */}
-                      {prevAgotada? <span>NOS VEMOS EN LA FIESTA!</span>: <span> IR A PAGAR </span>}
+                      {prevAgotada? <span>NOS VEMOS EN LA FIESTA!</span>: <span> AGOTADO! NOS VEMOS EL SABADO </span>}
                       
                       {/* ------------------------------------------------------------------------------------- */}
 

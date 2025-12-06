@@ -236,8 +236,8 @@ export function RegistrarForm() {
               
             
             {/* ------------------------------------------------------------------------------------- */}
-              PREVENTA #3
-              {/* PROXIMAMENTE PREVENTA #3 */}
+              {/* PREVENTA #3 */}
+              PROXIMAMENTE PREVENTA #4
             {/* ------------------------------------------------------------------------------------- */}
             
             
@@ -247,8 +247,8 @@ export function RegistrarForm() {
               
             {/* ------------------------------------------------------------------------------------- */}
             
-              {/* COMPRA TU <span className="text-primary">ENTRADA</span> */}
-              PROXIMAMENTE PRE<span className="text-primary">VENTA 4</span>
+              COMPRA TU <span className="text-primary">ENTRADA</span>
+              {/* PROXIMAMENTE <span className="text-primary">PREVENTA 4</span> */}
             
             {/* ------------------------------------------------------------------------------------- */}
             
@@ -257,11 +257,11 @@ export function RegistrarForm() {
               
               
             {/* ------------------------------------------------------------------------------------- */}
-            Preventa agotada! Nos vemos el sábado en La Fiesta Australiana!
+            {/* Preventa agotada! Nos vemos el sábado en La Fiesta Australiana! */}
             {/* Completá el formulario con tus datos para acceder a la preventa y asegurar tu lugar */}
             {/* Comprando una entrada vas a tener una cerveza <strong className="text-primary">imperial gratis</strong> para consumir por la tarde! */}
             {/* Tu entrada incluye una <strong >IMPERIAL</strong> para disfrutar de tu tarde en el Seven del Oeste - <strong>Retirala antes de las 21hs en el Refugio Aussie</strong> - Entrada al público del Seven del Oeste libre y gratuita. */}
-            {/* No te cuelgues y no te quedes fuera de la preventa #3 el dia lunes 24/11 */}
+            No te cuelgues y no te quedes fuera de la preventa #4 el dia lunes 8/11
             
             {/* ------------------------------------------------------------------------------------- */}
             
@@ -576,7 +576,7 @@ export function RegistrarForm() {
                       {/* ------------------------------------------------------------------------------------- */}
                       
                       {/* {prevAgotada? <span>NOS VEMOS EN LA FIESTA!</span>: <span> AGOTADO </span>} */}
-                      {prevAgotada? <span>NOS VEMOS EN LA FIESTA!</span>: <span> AGOTADO! NOS VEMOS EL SABADO </span>}
+                      {prevAgotada? <span>AGOTADO - NOS VEMOS EN LA FIESTA!</span>: <span> PROXIMAMENTE </span>}
                       
                       {/* ------------------------------------------------------------------------------------- */}
 

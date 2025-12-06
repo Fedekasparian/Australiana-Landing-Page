@@ -24,7 +24,7 @@ export function EventInfo() {
               </div>
               <div>
                 <h3 className="font-bold text-base sm:text-lg mb-1">Fecha</h3>
-                <p className="text-sm sm:text-base text-muted-foreground">Sábado 29 de Noviembre, 2025</p>
+                <p className="text-sm sm:text-base text-muted-foreground">Sábado 20 de Diciembre, 2025</p>
               </div>
             </div>
           </Card>

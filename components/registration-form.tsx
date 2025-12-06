@@ -248,7 +248,7 @@ export function RegistrarForm() {
             {/* ------------------------------------------------------------------------------------- */}
             
               {/* COMPRA TU <span className="text-primary">ENTRADA</span> */}
-              PREVENTA 3 <span className="text-primary">AGOTADA</span>
+              PROXIMAMENTE PRE<span className="text-primary">VENTA 4</span>
             
             {/* ------------------------------------------------------------------------------------- */}
             

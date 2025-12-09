@@ -261,7 +261,7 @@ export function RegistrarForm() {
             {/* Completá el formulario con tus datos para acceder a la preventa y asegurar tu lugar */}
             {/* Comprando una entrada vas a tener una cerveza <strong className="text-primary">imperial gratis</strong> para consumir por la tarde! */}
             {/* Tu entrada incluye una <strong >IMPERIAL</strong> para disfrutar de tu tarde en el Seven del Oeste - <strong>Retirala antes de las 21hs en el Refugio Aussie</strong> - Entrada al público del Seven del Oeste libre y gratuita. */}
-            No te cuelgues y no te quedes fuera de la preventa #4 el dia lunes 8/11
+            No te cuelgues y no te quedes fuera de la preventa #4 el dia lunes 10/12
             
             {/* ------------------------------------------------------------------------------------- */}
             

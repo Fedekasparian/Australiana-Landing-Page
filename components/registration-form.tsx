@@ -236,8 +236,8 @@ export function RegistrarForm() {
               
             
             {/* ------------------------------------------------------------------------------------- */}
-              {/* PREVENTA #3 */}
-              PROXIMAMENTE PREVENTA #4
+              PREVENTA #4
+              {/* PROXIMAMENTE PREVENTA #4 */}
             {/* ------------------------------------------------------------------------------------- */}
             
             
@@ -258,10 +258,10 @@ export function RegistrarForm() {
               
             {/* ------------------------------------------------------------------------------------- */}
             {/* Preventa agotada! Nos vemos el sábado en La Fiesta Australiana! */}
-            {/* Completá el formulario con tus datos para acceder a la preventa y asegurar tu lugar */}
+            Completá el formulario con tus datos para acceder a la preventa y asegurar tu lugar
             {/* Comprando una entrada vas a tener una cerveza <strong className="text-primary">imperial gratis</strong> para consumir por la tarde! */}
             {/* Tu entrada incluye una <strong >IMPERIAL</strong> para disfrutar de tu tarde en el Seven del Oeste - <strong>Retirala antes de las 21hs en el Refugio Aussie</strong> - Entrada al público del Seven del Oeste libre y gratuita. */}
-            No te cuelgues y no te quedes fuera de la preventa #4 el dia lunes 10/12
+            {/* No te cuelgues y no te quedes fuera de la preventa #4 el dia lunes 10/12 */}
             
             {/* ------------------------------------------------------------------------------------- */}
             
@@ -430,7 +430,7 @@ export function RegistrarForm() {
                             
                             {/* ------------------------------------------------------------------------------------- */}
                             
-                            australiana3.mp
+                            mp.mercedesrugbyclub
                             {/* mp.mercedesrugbyclub */}
                             {/* mercedesrc.bru */}
                             
@@ -464,11 +464,11 @@ export function RegistrarForm() {
                         <div className="bg-background p-3 sm:p-4 rounded-lg">
                           <p className="text-xs text-muted-foreground mb-1">MONTO A TRANSFERIR</p>
                           <p className="font-bold text-primary text-lg sm:text-xl">
-                            ${(formData.cantidad * 15000).toLocaleString("es-AR")}
+                            ${(formData.cantidad * 18000).toLocaleString("es-AR")}
                           </p>
                           <p className="text-xs text-muted-foreground mt-1">
                             {formData.cantidad} {formData.cantidad === 1 ? "entrada" : "entradas"} ×
-                            $15.000
+                            $18.000
                           </p>
                         </div>
                       </div>
@@ -565,8 +565,8 @@ export function RegistrarForm() {
                       onSubmit={handleGoToPay}
                       // ----------------------------------------------------------------------------------
                       
-                      disabled
-                      //disabled={prevAgotada || pagarBtn}
+                      //disabled
+                      disabled={prevAgotada || pagarBtn}
                       
                       // -----------------------------------------------------------------------------------
                       size="lg"
@@ -576,7 +576,7 @@ export function RegistrarForm() {
                       {/* ------------------------------------------------------------------------------------- */}
                       
                       {/* {prevAgotada? <span>NOS VEMOS EN LA FIESTA!</span>: <span> AGOTADO </span>} */}
-                      {prevAgotada? <span>AGOTADO - NOS VEMOS EN LA FIESTA!</span>: <span> PROXIMAMENTE </span>}
+                      {prevAgotada? <span>AGOTADO - NOS VEMOS EN LA FIESTA!</span>: <span> COMPRAR PREVENTA </span>}
                       
                       {/* ------------------------------------------------------------------------------------- */}
 
@@ -595,9 +595,9 @@ export function RegistrarForm() {
                   )}
                 </div>
 
-                <p className="text-xs sm:text-sm text-muted-foreground text-center">
+                {/* <p className="text-xs sm:text-sm text-muted-foreground text-center">
                   Luego de verificar el pago te llegará un mail con la confirmación del mismo.
-                </p>
+                </p> */}
                 
 
               </form>
@@ -608,7 +608,11 @@ export function RegistrarForm() {
                 </div>
                 <h3 className="text-xl sm:text-2xl font-bold text-foreground">¡Registro Exitoso!</h3>
                 <p className="text-sm sm:text-base text-muted-foreground px-4">
-                  Recibimos tu comprobante. En el transcurso de mañana te enviaremos un email con la confirmación del mismo.
+                  {/* Recibimos tu comprobante. En el transcurso de mañana te enviaremos un email con la confirmación del mismo. */}
+                  Recibimos tu comprobante. Si necesitamos confirmar algun dato te estaremos enviando un mail con la peticion de los mismos! Nos vemos en la Fiesta Australiana
+                </p>
+                <p className="text-sm sm:text-base text-muted-foreground px-4">
+                  <strong className="text-foreground">Retira tu pulsera eL 20/12 a la tarde en el club!</strong>
                 </p>
               </div>
             )}

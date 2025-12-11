@@ -565,8 +565,8 @@ export function RegistrarForm() {
                       onSubmit={handleGoToPay}
                       // ----------------------------------------------------------------------------------
                       
-                      //disabled
-                      disabled={prevAgotada || pagarBtn}
+                      disabled
+                      //disabled={prevAgotada || pagarBtn}
                       
                       // -----------------------------------------------------------------------------------
                       size="lg"
@@ -576,7 +576,7 @@ export function RegistrarForm() {
                       {/* ------------------------------------------------------------------------------------- */}
                       
                       {/* {prevAgotada? <span>NOS VEMOS EN LA FIESTA!</span>: <span> AGOTADO </span>} */}
-                      {prevAgotada? <span>AGOTADO - NOS VEMOS EN LA FIESTA!</span>: <span> COMPRAR PREVENTA </span>}
+                      {prevAgotada? <span>AGOTADO - NOS VEMOS EN LA FIESTA!</span>: <span> AGOTADO - NOS VEMOS EN LA FIESTA! </span>}
                       
                       {/* ------------------------------------------------------------------------------------- */}
 
